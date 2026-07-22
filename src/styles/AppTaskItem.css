@@ -1,0 +1,57 @@
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #4b4b4b;
+}
+
+.task-text {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+.task-checkbox {
+    flex-shrink: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 1.5px solid #4b4b4b;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s ease;
+    }
+
+.task-checkbox:checked {
+  background-color: #2961b6;
+  border: none;
+}
+
+.task-checkbox:hover {
+  transform: scale(1.1);
+  border-color: #fff;
+}
+
+.task-label.completed {
+  color: #9c9c9c;
+}
+
+.edit-button {
+  border: none;
+  background: none;
+  color: #4b4b4b;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.edit-button:hover {
+  transform: scale(1.1);
+  color: #fff;
+}
