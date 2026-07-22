@@ -10,7 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 10px auto;
-    width: 60%;
+    width: 90%;
 }
 
 .add-task-button {
@@ -30,11 +30,6 @@ body {
 
 .add-task-button:hover {
     box-shadow: 0 0 5px #fff;
-}
-
-.main-title {
-    margin: 10px auto;
-    width: 60%;
 }
 
 .task-list-title {

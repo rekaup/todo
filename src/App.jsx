@@ -4,6 +4,7 @@ import AppTaskCounter from './components/AppTaskCounter'
 import TaskItem from './components/AppTaskItem'
 import AppModalAddTask from './components/AppModalAddTask'
 import './styles/App.css'
+import Header from './components/AppHeader'
 
 
 function App() {
@@ -106,7 +107,8 @@ function App() {
 
   return (
     <div className="main">
-      <h1 className='main-title'>Todo-list</h1>
+      <Header />
+
       <AppTaskCounter 
       activeCount={activeTasks.length} 
       completedCount={completedTasks.length} 
