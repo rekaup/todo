@@ -1,4 +1,9 @@
 .app-header {
     width: 90%;
-    margin: 0 auto;
+    margin: 0 auto
+}
+
+.header-title {
+    margin: 0;
+    margin-top: 50px;
 }
