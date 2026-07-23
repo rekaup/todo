@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
-import initialTasks from './task'
 import AppTaskCounter from './components/AppTaskCounter'
 import TaskItem from './components/AppTaskItem'
-import AppModalAddTask from './components/AppModalAddTask'
 import './styles/App.css'
 import Header from './components/AppHeader'
 import { useModal } from './hooks/useModal'
 import { useTasks } from './hooks/useTasks'
+import AppModal from './components/AppModal'
+import TaskModalContent from './components/TaskModalContent'
 
 function App() {
 
@@ -43,16 +43,16 @@ function App() {
         +
       </button>
 
-      {modalMode && (
-        <AppModalAddTask 
-          modalText={modalText}
-          setModalText={setModalText}
-          handleSave={handleSave}
-          closeModal={closeModal}
-          modalMode={modalMode}
-          onDelete={() => {handleDelete(modalTaskId); closeModal()}}
+      <AppModal isOpen={modalMode != null} onClose={closeModal}>
+        <TaskModalContent
+        modalText={modalText}
+        setModalText={setModalText}
+        handleSave={handleSave}
+        closeModal={closeModal}
+        modalMode={modalMode}
+        onDelete={()=> {handleDelete(modalTaskId); closeModal()}}
         />
-      )}
+      </AppModal>
 
       <div className="task-lists">
         <p className='task-list-title'>Active Tasks</p>
