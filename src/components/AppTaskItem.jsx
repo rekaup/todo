@@ -3,7 +3,7 @@ import "../styles/AppTaskItem.css"
 
 export default function TaskItem({ task, onCheck, onDelete, onEdit }) {
     return (
-        <div className="task-item">
+        <div className={`task-item ${task.completed ? 'completed' : ''}`}>
             <div className="task-text">
                 <input
                     className="task-checkbox"

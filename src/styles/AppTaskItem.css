@@ -13,6 +13,7 @@
     flex: 1;
     min-width: 0;
     overflow-wrap: break-word;
+    word-break: break-word;
 }
 .task-checkbox {
     flex-shrink: 0;
@@ -24,7 +25,7 @@
     border: 1.5px solid #4b4b4b;
     border-radius: 5px;
     background-color: transparent;
-    cursor: pointer;
+    cursor: pointer;  
     position: relative;
     transition: 0.3s ease;
     }
@@ -40,7 +41,14 @@
 }
 
 .task-label.completed {
-  color: #9c9c9c;
+  color: #4b4b4b
+}
+
+.task-item.completed {
+  background-color: #0f0f0f;
+  border-radius: 15px;
+  padding: 10px 10px 10px;
+  border: none;
 }
 
 .edit-button {
