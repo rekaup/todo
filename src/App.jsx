@@ -32,7 +32,6 @@ function App() {
   return (
     <div className="main">
       <Header />
-
       <AppTaskCounter 
       activeCount={activeTasks.length} 
       completedCount={completedTasks.length} 
