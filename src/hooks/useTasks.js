@@ -1,14 +1,43 @@
 import { useState, useEffect } from "react";
 import initialTasks from "../task";
 
+function getCloudStorage() {
+    return window.Telegram?.WebApp?.CloudStorage
+}
+
 export function useTasks() {
-    const [tasks, setTasks] = useState(() => {
-        const savedTasks = localStorage.getItem('tasks')
-        return savedTasks ? JSON.parse(savedTasks) : initialTasks
-    })
+    const [tasks, setTasks] = useState(initialTasks)
+    const [isLoaded, setIsLoaded] = useState(false)
+
     useEffect(() => {
-        localStorage.setItem('tasks', JSON.stringify(tasks))
-    }, [tasks])
+      const cloudStorage = getCloudStorage()
+
+      if (cloudStorage) {
+        cloudStorage.getItem('tasks', (err, value) => {
+          if (!err && value) {
+            setTasks(JSON.parse(value))
+          }
+          setIsLoaded(true)
+        })
+      } else {
+        const savedTasks = localStorage.getItem('tasks')
+        if (savedTasks) setTasks(JSON.parse(savedTasks))
+        setIsLoaded(true)
+      }
+    }, [])
+
+    useEffect(() => {
+      if (!isLoaded) return
+
+      const json = JSON.stringify(tasks)
+      const cloudStorage = getCloudStorage()
+
+      if (cloudStorage) {
+        cloudStorage.setItem('tasks', json)
+      } else {
+        localStorage.setItem('tasks', json)
+      }
+    }, [tasks, isLoaded])
 
     function handleCheck(id) {
         const newTasks = tasks.map((task) => {
