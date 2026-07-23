@@ -39,3 +39,17 @@ body {
     margin: 0;
     margin-bottom: 10px;
 }
+
+.app-warning {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    gap: 20px;
+    margin: 10px auto;
+    width: 90%;
+    background-color: #790d0d;
+    padding: 0px 10px 0px 10px;
+    border-radius: 15px;
+}

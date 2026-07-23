@@ -7,6 +7,7 @@ import { useModal } from './hooks/useModal'
 import { useTasks } from './hooks/useTasks'
 import AppModal from './components/AppModal'
 import TaskModalContent from './components/TaskModalContent'
+import AppWarning from './components/AppWarning'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
 
   return (
     <div className="main">
+      <AppWarning/>
       <Header />
       <AppTaskCounter 
       activeCount={activeTasks.length} 
