@@ -8,7 +8,6 @@ import { useTasks } from './hooks/useTasks'
 import AppModal from './components/AppModal'
 import TaskModalContent from './components/TaskModalContent'
 import AppWarning from './components/AppWarning'
-import { useTelegram } from './hooks/useTelegram'
 
 function App() {
   const [newTaskText, setNewTaskText] = useState('')
