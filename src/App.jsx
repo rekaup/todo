@@ -5,7 +5,7 @@ import TaskItem from './components/AppTaskItem'
 import AppModalAddTask from './components/AppModalAddTask'
 import './styles/App.css'
 import Header from './components/AppHeader'
-
+import { useModal } from './hooks/useModal'
 
 function App() {
   const [tasks, setTasks] = useState(() => {
@@ -15,14 +15,12 @@ function App() {
   const [newTaskText, setNewTaskText] = useState('')
   const activeTasks = tasks.filter((task) => !task.completed)
   const completedTasks = tasks.filter((task) => task.completed)
-  const [modalMode, setModalMode] = useState(null)
-  const [modalTaskId, setModalTaskId] = useState(null)
-  const [modalText, setModalText] = useState('') 
   const totalTask = tasks.length
   const progressPercent = totalTask === 0 ? 0 : Math.round((completedTasks.length / totalTask) * 100)
   const [editTaskid, setEditTaskId] = useState(null)
   const [editTaskText, setEditTaskText] = useState('')
   
+  const {modalMode, modalTaskId, modalText, setModalMode, setModalTaskId, setModalText, openAddModal, openEditMode, closeModal} = useModal()
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
@@ -87,22 +85,6 @@ function App() {
     })
     setTasks(newTasks)
     setEditTaskId(null)
-  }
-
-  function openAddModal() {
-    setModalMode('add')
-    setModalText('')
-    setModalTaskId(null)
-  }
-
-  function openEditMode(task){
-    setModalMode('edit')
-    setModalText(task.text)
-    setModalTaskId(task.id)
-  }
-
-  function closeModal() {
-    setModalMode(null)
   }
 
   return (
