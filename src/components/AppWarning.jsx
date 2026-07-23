@@ -1,10 +1,10 @@
 import { TriangleAlert } from 'lucide-react';
 import '../styles/App.css'
 
-export default function AppWarning() {
+export default function AppWarning({warningText}) {
     return(<div className='app-warning'>
         <TriangleAlert />
-        <p className='warning-text'>Пользуйтесь только на одном устройстве, иначе данные могут не сохраниться</p>
+        <p className='warning-text'>{warningText}</p>
     </div>
     )
 }

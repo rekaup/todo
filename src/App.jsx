@@ -32,7 +32,11 @@ function App() {
 
   return (
     <div className="main">
-      <AppWarning/>
+      
+      <AppWarning 
+      warningText={"Пользуйтесь только на одном устройстве, иначе данные могут не сохраниться"
+      }/>
+
       <Header />
       <AppTaskCounter 
       activeCount={activeTasks.length} 
