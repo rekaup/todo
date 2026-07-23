@@ -1,8 +1,8 @@
 import '../styles/AppHeader.css'
 
-export default function Header(user) {
+export default function Header() {
     return(<header className='app-header'>
-        <h1 className='header-title'>todo {user}</h1>
+        <h1 className='header-title'>todo</h1>
         <p className='app-version'>v{__APP__VERSION__}</p>
     </header>
     )
