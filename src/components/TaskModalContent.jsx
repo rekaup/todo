@@ -4,6 +4,7 @@ import { useRef, useEffect } from 'react';
 
 export default function TaskModalContent({modalText, setModalText, handleSave, closeModal, modalMode, onDelete}) {
     const isEditMode = modalMode === 'edit'
+    const isAddMode = modalMode === 'add'
     const textareaRef = useRef(null)
     useEffect(() => {
         if (textareaRef.current) {
@@ -23,7 +24,6 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
     <>
         <div className='modal-header'>
             <h3 className='modal-title'>{isEditMode ? 'Edit task' : 'Add new task'}</h3>
-            <button onClick={closeModal} className='modal-button-close'>Cancel</button>
         </div>
 
         <div className='modal-body'>
@@ -38,14 +38,17 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
                 />
             </div>
             <div className='modal-action-bar'>
+                    <button onClick={handleSave} className='modal-button'>
+                        {isEditMode ? <span className='edit'><Check size={20} /> Complete</span> : <span className='add'><Plus size={20} />Add</span>}
+                    </button>
                 {isEditMode && (
                     <button onClick={onDelete} className='modal-button delete'>
                     <span><Trash2 size={18} /> <p>Delete</p></span>
                     </button>
                 )}
-                    <button onClick={handleSave} className='modal-button'>
-                        {isEditMode ? <span className='edit'><Check size={20} /> Complete</span> : <span className='add'><Plus size={20} />Add</span>}
-                    </button>
+                {isAddMode && (
+                    <button onClick={closeModal} className='modal-button close'>Cancel</button>
+                )}
             </div>
         </div>
     </>

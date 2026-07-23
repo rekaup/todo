@@ -24,7 +24,7 @@
 
 .modal {
     background: #1b1b1b;
-    border-radius: 20px 20px 0 0;
+    border-radius: 15px 15px 0 0;
     padding: 20px 20px 28px;
     width: 100%;
     box-sizing: border-box;
@@ -43,23 +43,6 @@
 .modal-title {
     margin: 0;
     cursor: default;
-}
-
-.modal-button-close {
-    border: none;
-    margin: 0;
-    height: fit-content;
-    padding: 5px 10px;
-    font-size: 15px;
-    background: none;
-    color: #4b4b4b;
-    transition: 0.3s ease;
-    cursor: pointer;
-}
-
-.modal-button-close:hover {
-    scale: 1.1;
-    color: #fff;
 }
 
 .body-input {
@@ -87,12 +70,19 @@
     min-height: 50px;
 }
 
+.modal-action-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
 .modal-button {
     display: flex;
     width: 100%;
     min-height: 50px;
     border: none;
-    border-radius: 20px;
+    border-radius: 15px;
     align-items: center;
     font-size: 15px;
     cursor: pointer;
@@ -108,6 +98,7 @@
     color: #2961b6;
 }
 
+
 .modal-button span {
     display: flex;
     align-items: center;
@@ -116,13 +107,24 @@
 }
 
 .modal-button.delete {
-    background-color: #be0f0f;
-    color: #fff;
+    background: none;
+    color: #ff0000;
+    width: fit-content;
 }
 
 .modal-button.delete:hover {
-    background-color: #fff;
-    color: #be0f0f;
+    color: #ffffff;
+}
+
+.modal-button.close {
+    background: none;
+    color: #4b4b4b;
+    width: fit-content;
+}
+
+
+.modal-button.close:hover {
+    color: #fff;
 }
 
 .modal-handle {
@@ -132,31 +134,3 @@
     border-radius: 2px;
     margin: 0 auto 20px;
 }
-
-.delete-button {
-    display: flex;
-    gap: 5px;
-    cursor: pointer;
-    transition: 0.3s ease;
-    padding: 10px;
-    align-items: center;
-    border-radius: 15px;
-    border: none;
-    background-color: #be0f0f;
-}
-
-.delete-button p {
-    margin: 0;
-}
-
-.delete-button:hover {
-    color: #be0f0f;
-    background-color: #fff;
-}
-
-.modal-action-bar {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
