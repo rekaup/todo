@@ -1,6 +1,7 @@
 import { Plus, Check, Trash2 } from 'lucide-react';
 import '../styles/Modal.css'
 import { useRef, useEffect } from 'react';
+import Divider from '../layout/Divider';
 
 export default function TaskModalContent({modalText, setModalText, handleSave, closeModal, modalMode, onDelete}) {
     const isEditMode = modalMode === 'edit'
@@ -29,7 +30,7 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
         <div className='modal-body'>
             <div className='body-input'>
                 <textarea 
-                rows={1}
+                rows={textareaRef}
                 placeholder={isEditMode ? 'Edit your task' : 'Enter a new task'}
                 value={modalText}
                 onChange={handleModalTextChange}
@@ -38,17 +39,17 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
                 />
             </div>
             <div className='modal-action-bar'>
-                    <button onClick={handleSave} className='modal-button'>
-                        {isEditMode ? <span className='edit'><Check size={20} /> Complete</span> : <span className='add'><Plus size={20} />Add</span>}
-                    </button>
-                {isEditMode && (
-                    <button onClick={onDelete} className='modal-button delete'>
-                    <span><Trash2 size={18} /> <p>Delete</p></span>
-                    </button>
-                )}
+                <button onClick={handleSave} className='modal-button'>
+                    {isEditMode ? <span className='edit'><Check size={20} /> Complete</span> : <span className='add'><Plus size={20} />Add</span>}
+                </button>
                 {isAddMode && (
                     <button onClick={closeModal} className='modal-button close'>Cancel</button>
                 )}
+                {isEditMode && 
+                    <button onClick={onDelete} className='modal-button delete'>
+                        <span><Trash2 size={18} /> <p>Delete</p></span>
+                    </button>
+                }
             </div>
         </div>
     </>

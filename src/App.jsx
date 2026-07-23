@@ -10,7 +10,6 @@ import TaskModalContent from './components/TaskModalContent'
 import AppWarning from './components/AppWarning'
 
 function App() {
-
   const [newTaskText, setNewTaskText] = useState('')
   const [editTaskid, setEditTaskId] = useState(null)
   const [editTaskText, setEditTaskText] = useState('')

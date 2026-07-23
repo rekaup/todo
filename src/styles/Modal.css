@@ -24,9 +24,10 @@
 
 .modal {
     background: #1b1b1b;
-    border-radius: 15px 15px 0 0;
+    border-radius: 20px 20px 0 0;
     padding: 20px 20px 28px;
     width: 100%;
+    margin: 0px 10px 0px 10px;
     box-sizing: border-box;
     z-index: 3;
     animation: slideUp 0.3s ease;
@@ -43,6 +44,7 @@
 .modal-title {
     margin: 0;
     cursor: default;
+    font-size: 20px;
 }
 
 .body-input {
