@@ -7,9 +7,3 @@ export default function Header() {
     </header>
     )
 }
-
-{/* <div className='debug'>
-<p style={{color: 'red', fontSize: '10px'}}>
-CloudStorage: {window.Telegram?.WebApp?.CloudStorage ? 'есть' : 'нет'}
-</p>
-</div> */}
