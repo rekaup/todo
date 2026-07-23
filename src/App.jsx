@@ -17,9 +17,10 @@ function App() {
 
   const {modalMode, modalTaskId, modalText, setModalMode, setModalTaskId, setModalText, openAddModal, openEditMode, closeModal} = useModal()
   const {tasks, activeTasks, completedTasks, editTask, handleDelete, handleCheck, addTask} = useTasks()
-  const {userTg} = useTelegram()
+  const {user} = useTelegram()
   const totalTask = tasks.length
   const progressPercent = totalTask === 0 ? 0 : Math.round((completedTasks.length / totalTask) * 100)
+
 
   function handleSave() {
     if (modalText.trim() == '') return
@@ -38,7 +39,7 @@ function App() {
       warningText={"Пользуйтесь только на одном устройстве, иначе данные могут не сохраниться"
       }/>
 
-      <Header userTg={userTg}/>
+      <Header user={user.username}/>
       <AppTaskCounter 
       activeCount={activeTasks.length} 
       completedCount={completedTasks.length} 
