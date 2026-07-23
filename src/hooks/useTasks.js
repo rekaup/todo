@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import initialTasks from "../task";
 
 function getCloudStorage() {
-    return window.Telegram?.WebApp?.CloudStorage
+    const tg = window.Telegram?.WebApp
+    if (!tg) return null
+    const isSupported = tg.isVersionAtLeast ? tg.isVersionAtLeast('6.9') : false
+    return isSupported ? tg.CloudStorage : null
 }
 
 export function useTasks() {
@@ -10,20 +13,27 @@ export function useTasks() {
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
-      const cloudStorage = getCloudStorage()
+    const cloudStorage = getCloudStorage()
 
-      if (cloudStorage) {
+    if (cloudStorage) {
+        try {
         cloudStorage.getItem('tasks', (err, value) => {
-          if (!err && value) {
+            if (!err && value) {
             setTasks(JSON.parse(value))
-          }
-          setIsLoaded(true)
+            }
+            setIsLoaded(true)
         })
-      } else {
+        } catch (e) {
+        console.warn('CloudStorage недоступен, использую localStorage', e)
         const savedTasks = localStorage.getItem('tasks')
         if (savedTasks) setTasks(JSON.parse(savedTasks))
         setIsLoaded(true)
-      }
+        }
+    } else {
+        const savedTasks = localStorage.getItem('tasks')
+        if (savedTasks) setTasks(JSON.parse(savedTasks))
+        setIsLoaded(true)
+    }
     }, [])
 
     useEffect(() => {
