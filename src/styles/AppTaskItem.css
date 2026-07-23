@@ -1,10 +1,9 @@
 .task-item {
     display: flex;
     justify-content: space-between;
-    font-size: 15px;
-    padding-bottom: 10px;
+    font-size: 17px;
+    padding: 10px 10px 10px;
     margin-bottom: 10px;
-    border-bottom: 1px solid #4b4b4b;
 }
 
 .task-text {
@@ -47,7 +46,6 @@
 .task-item.completed {
   background-color: #0f0f0f;
   border-radius: 15px;
-  padding: 10px 10px 10px;
   border: none;
 }
 
