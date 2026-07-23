@@ -38,18 +38,14 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
                 />
             </div>
             <div className='modal-action-bar'>
-                <div className='action-left'>
                 {isEditMode && (
-                    <button onClick={onDelete} className='delete-button'>
-                    <Trash2 size={18} /> <p>Delete</p>
+                    <button onClick={onDelete} className='modal-button delete'>
+                    <span><Trash2 size={18} /> <p>Delete</p></span>
                     </button>
                 )}
-                </div>
-                <div className='action-right'>
                     <button onClick={handleSave} className='modal-button'>
                         {isEditMode ? <span className='edit'><Check size={20} /> Complete</span> : <span className='add'><Plus size={20} />Add</span>}
                     </button>
-                </div>
             </div>
         </div>
     </>
