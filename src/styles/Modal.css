@@ -23,7 +23,7 @@
 }
 
 .modal {
-    background: #1b1b1b;
+    background: #060708;
     border-radius: 20px 20px 0 0;
     padding: 20px 20px 28px;
     width: 100%;
@@ -123,6 +123,7 @@
     background: none;
     color: #4b4b4b;
     width: fit-content;
+    height: fit-content;
 }
 
 

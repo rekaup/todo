@@ -8,6 +8,7 @@ import { useTasks } from './hooks/useTasks'
 import AppModal from './components/AppModal'
 import TaskModalContent from './components/TaskModalContent'
 import AppWarning from './components/AppWarning'
+import { useTelegram } from './hooks/useTelegram'
 
 function App() {
   const [newTaskText, setNewTaskText] = useState('')
@@ -16,6 +17,7 @@ function App() {
 
   const {modalMode, modalTaskId, modalText, setModalMode, setModalTaskId, setModalText, openAddModal, openEditMode, closeModal} = useModal()
   const {tasks, activeTasks, completedTasks, editTask, handleDelete, handleCheck, addTask} = useTasks()
+  const {userTg} = useTelegram()
   const totalTask = tasks.length
   const progressPercent = totalTask === 0 ? 0 : Math.round((completedTasks.length / totalTask) * 100)
 
@@ -36,7 +38,7 @@ function App() {
       warningText={"Пользуйтесь только на одном устройстве, иначе данные могут не сохраниться"
       }/>
 
-      <Header />
+      <Header userTg={userTg}/>
       <AppTaskCounter 
       activeCount={activeTasks.length} 
       completedCount={completedTasks.length} 
