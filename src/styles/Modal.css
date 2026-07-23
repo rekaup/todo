@@ -31,6 +31,7 @@
     box-sizing: border-box;
     z-index: 3;
     animation: slideUp 0.3s ease;
+    transition: .2s;
 }
 
 .modal-header {

@@ -1,24 +1,27 @@
 import { Plus, Check, Trash2 } from 'lucide-react';
 import '../styles/Modal.css'
-import { useRef, useEffect } from 'react';
+import { useRef, useLayoutEffect } from 'react';
 import Divider from '../layout/Divider';
 
 export default function TaskModalContent({modalText, setModalText, handleSave, closeModal, modalMode, onDelete}) {
     const isEditMode = modalMode === 'edit'
     const isAddMode = modalMode === 'add'
     const textareaRef = useRef(null)
-    useEffect(() => {
+
+    const resizeTextarea = (el) => {
+        el.style.height = "auto";
+        el.style.height = `${el.scrollHeight}px`;
+    };
+
+    useLayoutEffect(() => {
         if (textareaRef.current) {
-            textareaRef.current.style.height = '0px';
-            const newHeight = textareaRef.current.scrollHeight;
-            textareaRef.current.style.height = newHeight + 'px';
+            resizeTextarea(textareaRef.current);
         }
     }, [modalText]);
 
     const handleModalTextChange = (e) => {
         setModalText(e.target.value);
-        e.target.style.height = '0px';
-        e.target.style.height = e.target.scrollHeight + 'px';
+        resizeTextarea(e.target);
     };
 
     return(
@@ -30,7 +33,7 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
         <div className='modal-body'>
             <div className='body-input'>
                 <textarea 
-                rows={textareaRef}
+                ref={textareaRef}
                 placeholder={isEditMode ? 'Edit your task' : 'Enter a new task'}
                 value={modalText}
                 onChange={handleModalTextChange}
