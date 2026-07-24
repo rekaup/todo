@@ -1,9 +1,9 @@
 import { SquarePen } from 'lucide-react';
-import "../styles/AppTaskItem.css"
+import '../styles/components/TaskItem.css'
 
 export default function TaskItem({ task, onCheck, onDelete, onEdit }) {
     return (
-        <div className={`task-item ${task.completed ? 'completed' : ''}`}>
+        <div className={`task-item flex ${task.completed ? 'completed' : ''}`}>
             <div className="task-text">
                 <input
                     className="task-checkbox"

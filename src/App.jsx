@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import AppTaskCounter from './components/AppTaskCounter'
 import TaskItem from './components/AppTaskItem'
-import './styles/App.css'
 import Header from './components/AppHeader'
 import { useModal } from './hooks/useModal'
 import { useTasks } from './hooks/useTasks'
 import AppModal from './components/AppModal'
 import TaskModalContent from './components/TaskModalContent'
 import AppWarning from './components/AppWarning'
+import './styles/components/App.css'
+import './styles/utilities.css'
 
 function App() {
   const {modalMode, modalTaskId, modalText, setModalMode, setModalTaskId, setModalText, openAddModal, openEditMode, closeModal} = useModal()
@@ -55,7 +56,7 @@ function App() {
         />
       </AppModal>
 
-      <div className="task-lists">
+      <div className="task-lists ">
         <p className='task-list-title'>Active Tasks</p>
         {activeTasks.map((task) => (
         <TaskItem
@@ -68,7 +69,7 @@ function App() {
         ))}
       </div>
 
-      <div className="task-lists">
+      <div className="task-lists flex-column">
         <p className='task-list-title'>Completed Tasks</p>
         {completedTasks.map((task) => (
         <TaskItem

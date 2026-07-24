@@ -1,7 +1,9 @@
 import { Plus, Check, Trash2, X } from 'lucide-react';
-import '../styles/Modal.css'
 import { useRef, useLayoutEffect } from 'react';
-import Divider from '../layout/Divider';
+import Divider from "../layout/Divider"
+import '../styles/components/Modal.css'
+
+
 
 export default function TaskModalContent({modalText, setModalText, handleSave, closeModal, modalMode, onDelete}) {
     const isEditMode = modalMode === 'edit'
@@ -28,7 +30,7 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
     <>
         <div className='modal-header'>
             <h3 className='modal-title'>{isEditMode ? 'Edit task' : 'Add new task'}</h3>
-            <button onClick={closeModal} className='modal-button close'>
+            <button onClick={closeModal} className='modal-button close flex-center w-full'>
                 <X />
             </button>
         </div>
@@ -40,21 +42,21 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
                 placeholder={isEditMode ? 'Edit your task' : 'Enter a new task'}
                 value={modalText}
                 onChange={handleModalTextChange}
-                className='modal-input'
+                className='modal-input w-full'
                 autoFocus
                 />
             </div>
             <Divider />
             <div className='modal-action-bar'>
                 {isAddMode && (
-                    <button onClick={closeModal} className='modal-button censel'>Cancel</button>
+                    <button onClick={closeModal} className='modal-button censel flex-center w-full'>Cancel</button>
                 )}
                 {isEditMode && 
-                    <button onClick={onDelete} className='modal-button delete'>
+                    <button onClick={onDelete} className='modal-button delete flex-center w-full'>
                         <span><Trash2 size={18} /> <p>Delete</p></span>
                     </button>
                 }
-                <button onClick={handleSave} className={'modal-button' && isEditMode ? 'modal-button edit' : 'modal-button add'}>
+                <button onClick={handleSave} className={isEditMode ? 'modal-button edit flex-center w-full' : 'modal-button add flex-center w-full'}>
                     {isEditMode ? <span className='edit'><Check size={20} /> Complete</span> : <span className='add'><Plus size={20} />Add</span>}
                 </button>
             </div>

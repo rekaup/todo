@@ -1,0 +1,65 @@
+.task-lists {
+    margin: var(--space-md) auto;
+    width: 90%;
+}
+
+.add-task-button {
+    z-index: 1 ;
+    position: fixed;
+    bottom: 30px;
+    right: 5%;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: var(--text);
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+    transition: var(--transition);
+}
+
+.add-task-button:hover {
+    box-shadow: var(--shadow-primary);
+}
+
+.task-list-title {
+    text-transform: uppercase;
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+    margin-bottom: var(--space-md)
+}
+
+.app-warning {
+    gap: var(--space-md);
+    background: var(--warning-bg);
+    border-radius: var(--radius-md);
+    padding: var(--space-md) var(--space-lg);
+    margin: var(--space-md) auto;
+    width: 90%;
+}
+
+.warning-close {
+    border: none;
+    background: none;
+    color: var(--warning);
+    padding: var(--space-xs);
+    cursor: pointer;
+}
+
+.warning-left-side {
+    flex-shrink: 0;
+    color: var(--warning);;
+    background-color: var(--warning-surface);
+    border-radius: var(--radius-md);
+    height: 35px;
+    width: 35px;
+}
+
+.warning-text {
+    font-size: 13px;
+    flex: 1;
+    margin: 0;
+}
+

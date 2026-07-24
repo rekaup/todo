@@ -1,9 +1,8 @@
 .task-item {
-    display: flex;
     justify-content: space-between;
     font-size: 17px;
-    padding: 10px 10px 10px;
-    margin-bottom: 10px;
+    padding: var(--space-md) var(--space-md) var(--space-md);
+    margin-bottom: var(--space-md);
 }
 
 .task-text {
@@ -20,44 +19,44 @@
     -webkit-appearance: none;
     width: 20px;
     height: 20px;
-    margin-right: 10px;
+    margin-right: var(--space-md);
     border: 1.5px solid #4b4b4b;
-    border-radius: 5px;
+    border-radius: var(--radius-cb);
     background-color: transparent;
     cursor: pointer;  
     position: relative;
-    transition: 0.3s ease;
+    transition: var(--animation-normal);
     }
 
 .task-checkbox:checked {
-  background-color: #2961b6;
+  background-color: var(--primary);
   border: none;
 }
 
 .task-checkbox:hover {
   transform: scale(1.1);
-  border-color: #fff;
+  border-color: var(--text);
 }
 
 .task-label.completed {
-  color: #4b4b4b
+  color: var(--text-secondary)
 }
 
 .task-item.completed {
-  background-color: #060708;
-  border-radius: 15px;
+  background-color: var(--task-bg);
+  border-radius: var(--radius-md);
   border: none;
 }
 
 .edit-button {
   border: none;
   background: none;
-  color: #4b4b4b;
+  color: var(--text-secondary);
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: var(--animation-normal);
 }
 
 .edit-button:hover {
   transform: scale(1.1);
-  color: #fff;
+  color: var(--text);
 }
