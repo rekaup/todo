@@ -4,6 +4,7 @@ body {
     background-color: #000;
     color: #fff;
     font-family: "Montserrat", sans-serif;
+    scrollbar-width: none;
 }
 
 .task-lists {

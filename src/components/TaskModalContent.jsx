@@ -44,18 +44,19 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
                 autoFocus
                 />
             </div>
+            <Divider />
             <div className='modal-action-bar'>
-                <button onClick={handleSave} className='modal-button'>
-                    {isEditMode ? <span className='edit'><Check size={20} /> Complete</span> : <span className='add'><Plus size={20} />Add</span>}
-                </button>
                 {isAddMode && (
-                    <button onClick={closeModal} className='modal-button close'>Cancel</button>
+                    <button onClick={closeModal} className='modal-button censel'>Cancel</button>
                 )}
                 {isEditMode && 
                     <button onClick={onDelete} className='modal-button delete'>
                         <span><Trash2 size={18} /> <p>Delete</p></span>
                     </button>
                 }
+                <button onClick={handleSave} className={'modal-button' && isEditMode ? 'modal-button edit' : 'modal-button add'}>
+                    {isEditMode ? <span className='edit'><Check size={20} /> Complete</span> : <span className='add'><Plus size={20} />Add</span>}
+                </button>
             </div>
         </div>
     </>

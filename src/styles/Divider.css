@@ -1,5 +1,8 @@
 .Divider {
     height: 1px;
-    background: #999999;
-    width: 100%;
+    background: #2d2d2f;
+    width: 90%;
+    margin-bottom: 20px;
+    margin-top: auto;
+    border-radius: 10px;
 }
