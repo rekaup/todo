@@ -24,7 +24,7 @@ export function useTasks() {
             setIsLoaded(true)
         })
         } catch (e) {
-        console.warn('CloudStorage недоступен, использую localStorage', e)
+        console.warn('CloudStorage недоступен, используется localStorage', e)
         const savedTasks = localStorage.getItem('tasks')
         if (savedTasks) setTasks(JSON.parse(savedTasks))
         setIsLoaded(true)

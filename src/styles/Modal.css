@@ -27,11 +27,13 @@
     border-radius: 20px 20px 0 0;
     padding: 20px 20px 28px;
     width: 100%;
-    margin: 0px 10px 0px 10px;
     box-sizing: border-box;
     z-index: 3;
     animation: slideUp 0.3s ease;
     transition: .2s;
+    height: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .modal-header {
@@ -76,8 +78,9 @@
 .modal-action-bar {
     display: flex;
     flex-direction: column;
-    gap: 10px;
     align-items: center;
+    gap: 5px;
+    margin-top: auto
 }
 
 .modal-button {
@@ -137,4 +140,11 @@
     background: #999999;
     border-radius: 2px;
     margin: 0 auto 20px;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
 }

@@ -41,15 +41,40 @@ body {
 }
 
 .app-warning {
-    font-size: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #790d0d86;
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin: 10px;
+    width: 90%;
+    justify-content: center;
+}
+
+.warning-close {
+    border: none;
+    background: none;
+    color: #fc0101;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.warning-left-side {
+    flex-shrink: 0;
+    color: #fc0101;
+    background-color: #fc010157;
+    border-radius: 10px;
+    height: 35px;
+    width: 35px;
     display: flex;
     align-items: center;
-    word-break: break-word;
-    overflow-wrap: break-word;
-    gap: 20px;
-    margin: 10px auto;
-    width: fit-content;
-    background-color: #790d0d;
-    padding: 0px 10px 0px 10px;
-    border-radius: 15px;
+    justify-content: center;
 }
+
+.warning-text {
+    font-size: 13px;
+    flex: 1;
+    margin: 0;
+}
+

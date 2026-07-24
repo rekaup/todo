@@ -10,10 +10,6 @@ import TaskModalContent from './components/TaskModalContent'
 import AppWarning from './components/AppWarning'
 
 function App() {
-  const [newTaskText, setNewTaskText] = useState('')
-  const [editTaskid, setEditTaskId] = useState(null)
-  const [editTaskText, setEditTaskText] = useState('')
-
   const {modalMode, modalTaskId, modalText, setModalMode, setModalTaskId, setModalText, openAddModal, openEditMode, closeModal} = useModal()
   const {tasks, activeTasks, completedTasks, editTask, handleDelete, handleCheck, addTask} = useTasks()
   const totalTask = tasks.length

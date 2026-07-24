@@ -1,4 +1,4 @@
-import { Plus, Check, Trash2 } from 'lucide-react';
+import { Plus, Check, Trash2, X } from 'lucide-react';
 import '../styles/Modal.css'
 import { useRef, useLayoutEffect } from 'react';
 import Divider from '../layout/Divider';
@@ -28,6 +28,9 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
     <>
         <div className='modal-header'>
             <h3 className='modal-title'>{isEditMode ? 'Edit task' : 'Add new task'}</h3>
+            <button onClick={closeModal} className='modal-button close'>
+                <X />
+            </button>
         </div>
 
         <div className='modal-body'>
