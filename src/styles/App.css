@@ -15,6 +15,7 @@ body {
 }
 
 .add-task-button {
+    z-index: 1;
     position: fixed;
     bottom: 30px;
     right: 5%;
