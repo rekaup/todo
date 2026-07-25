@@ -1,28 +1,31 @@
 .bottom-bar {
     position: fixed;
-    bottom: 24px;
+    bottom: var(--space-xxl);
     display: flex;
-    gap: 20px;
+    gap: var(--space-xl);
     margin: 0 auto;
     width: 100%;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.add-task-button {
+.task-button {
     z-index: 1 ;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: var(--primary);
-    color: var(--text);
+    width: var(--button);
+    height: var(--button);
+    border-radius: var(--radius-lg);
+    background-color: var(--surface);
+    color: var(--text-secondary);
     border: none;
     cursor: pointer;
     transition: var(--transition);
-    align-items: center;
-    display: flex;
-    justify-content: center;
 }
 
-.add-task-button:hover {
+.task-button:hover {
     box-shadow: var(--shadow-primary);
+}
+
+.task-button.add {
+    background-color: var(--primary);
+    color: var(--text);
 }

@@ -37,8 +37,8 @@
     color: var(--warning);;
     background-color: var(--warning-surface);
     border-radius: var(--radius-md);
-    height: 35px;
-    width: 35px;
+    width: var(--button);
+    height: var(--button);
 }
 
 .warning-text {

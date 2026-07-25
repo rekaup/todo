@@ -30,9 +30,6 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
     <>
         <div className='modal-header'>
             <h3 className='modal-title'>{isEditMode ? 'Edit task' : 'Add new task'}</h3>
-            {/* <button onClick={closeModal} className='modal-button close flex-center w-full'>
-                <X />
-            </button> */}
         </div>
 
         <div className='modal-body'>

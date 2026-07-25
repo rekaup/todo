@@ -21,6 +21,8 @@
     --space-xl: 20px;
     --space-xxl: 30px;
 
+    --button: 48px;
+
     --warning: #fc0101;
     --warning-bg: #790d0d86;
     --warning-surface: #fc010157;
@@ -32,5 +34,5 @@
 
     --font: "Montserrat", sans-serif;
 
-    --shadow-primary: 0 0 5px rgba(78, 122, 187, 0.384);
+    --shadow-primary: 0 0 5px rgba(94, 94, 94, 0.384);
 }

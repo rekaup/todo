@@ -20,3 +20,7 @@
     width: fit-content;
     height: fit-content;
 }
+
+.app-version {
+    color: var(--text-secondary)
+}

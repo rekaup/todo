@@ -10,13 +10,14 @@ import AppWarning from './components/AppWarning'
 import './styles/components/App.css'
 import './styles/utilities.css'
 import BottonBar from './components/BottonBar'
+import AppInfoContent from './components/AppInfoContent'
 
 function App() {
   const {modalMode, modalTaskId, modalText, setModalMode, setModalTaskId, setModalText, openAddModal, openEditMode, closeModal} = useModal()
   const {tasks, activeTasks, completedTasks, editTask, handleDelete, handleCheck, addTask} = useTasks()
   const totalTask = tasks.length
   const progressPercent = totalTask === 0 ? 0 : Math.round((completedTasks.length / totalTask) * 100)
-
+  const [inInfoOpen, setIsInfoOpen] = useState(false)
 
   function handleSave() {
     if (modalText.trim() == '') return
@@ -52,6 +53,10 @@ function App() {
         onDelete={()=> {handleDelete(modalTaskId); closeModal()}}
         />
       </AppModal>
+      
+      <AppModal isOpen={inInfoOpen} onClose={() => setIsInfoOpen(false)}>
+        <AppInfoContent />
+      </AppModal>
 
       <div className="task-lists flex-column">
         <p className='task-list-title'>Active Tasks</p>
@@ -79,7 +84,10 @@ function App() {
         ))}
       </div>
 
-      <BottonBar openAddModal={openAddModal} />
+      <BottonBar 
+        openAddModal={openAddModal} 
+        openInfoModal={() => setIsInfoOpen(true)} 
+      />
     </div>
   )
 }

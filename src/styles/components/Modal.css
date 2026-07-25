@@ -34,9 +34,10 @@
 }
 
 .modal-title {
-    margin: 0 auto;
+    margin: 0;
     cursor: default;
     font-size: 20px;
+    margin: 0 auto;
 }
 
 .body-input {
@@ -139,4 +140,16 @@
     flex-direction: column;
     flex: 1;
     min-height: 0;
+}
+
+.modal-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md)
+}
+
+.modal-info-text {
+    color: var( --text-secondary);
 }
