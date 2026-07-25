@@ -9,6 +9,7 @@ import TaskModalContent from './components/TaskModalContent'
 import AppWarning from './components/AppWarning'
 import './styles/components/App.css'
 import './styles/utilities.css'
+import BottonBar from './components/BottonBar'
 
 function App() {
   const {modalMode, modalTaskId, modalText, setModalMode, setModalTaskId, setModalText, openAddModal, openEditMode, closeModal} = useModal()
@@ -41,10 +42,6 @@ function App() {
       progressPercent={progressPercent}
       />
 
-      <button onClick={openAddModal} className='add-task-button'>
-        +
-      </button>
-
       <AppModal isOpen={modalMode != null} onClose={closeModal}>
         <TaskModalContent
         modalText={modalText}
@@ -56,7 +53,7 @@ function App() {
         />
       </AppModal>
 
-      <div className="task-lists ">
+      <div className="task-lists flex-column">
         <p className='task-list-title'>Active Tasks</p>
         {activeTasks.map((task) => (
         <TaskItem
@@ -69,7 +66,7 @@ function App() {
         ))}
       </div>
 
-      <div className="task-lists flex-column">
+      <div className="task-lists flex-column completed">
         <p className='task-list-title'>Completed Tasks</p>
         {completedTasks.map((task) => (
         <TaskItem
@@ -81,6 +78,8 @@ function App() {
         />
         ))}
       </div>
+
+      <BottonBar openAddModal={openAddModal} />
     </div>
   )
 }
