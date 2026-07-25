@@ -48,6 +48,9 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
             </div>
             <Divider />
             <div className='modal-action-bar'>
+                <button onClick={handleSave} className={isEditMode ? 'modal-button edit flex-center w-full' : 'modal-button add flex-center w-full'}>
+                    {isEditMode ? <span className='edit'><Check size={20} /> Complete</span> : <span className='add'><Plus size={20} />Add</span>}
+                </button>
                 {isAddMode && (
                     <button onClick={closeModal} className='modal-button censel flex-center w-full'>Cancel</button>
                 )}
@@ -56,9 +59,6 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
                         <span><Trash2 size={18} /> <p>Delete</p></span>
                     </button>
                 }
-                <button onClick={handleSave} className={isEditMode ? 'modal-button edit flex-center w-full' : 'modal-button add flex-center w-full'}>
-                    {isEditMode ? <span className='edit'><Check size={20} /> Complete</span> : <span className='add'><Plus size={20} />Add</span>}
-                </button>
             </div>
         </div>
     </>
