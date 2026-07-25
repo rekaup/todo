@@ -1,10 +1,17 @@
 import { TriangleAlert, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/components/App.css'
 import '../styles/utilities.css'
 
 export default function AppWarning({warningText}) {
-    const [isVisible, setIsVisible] = useState(true)
+    const [isVisible, setIsVisible] = useState(() => {
+        return localStorage.getItem("warning-hidden") !== "true";
+    });
+    
+    const handleClose = () => {
+        setIsVisible(false);
+        localStorage.setItem("warning-hidden", "true");
+    }
 
     if (!isVisible) return null;
 
@@ -14,7 +21,7 @@ export default function AppWarning({warningText}) {
             <TriangleAlert className='warning-ico'/>
         </div>
         <p className='warning-text'>{warningText}</p>
-        <button onClick={()=> setIsVisible(false)} className='warning-close'>
+        <button onClick={handleClose} className='warning-close'>
             <X size={17}/>
         </button>
     </div>

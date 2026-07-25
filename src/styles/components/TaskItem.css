@@ -3,6 +3,7 @@
     font-size: 17px;
     padding: var(--space-md) var(--space-md) var(--space-md);
     margin-bottom: var(--space-md);
+    align-items: center;
 }
 
 .task-text {
@@ -53,6 +54,7 @@
   background: none;
   color: var(--text-secondary);
   cursor: pointer;
+  padding: 0;
   transition: var(--animation-normal);
 }
 
