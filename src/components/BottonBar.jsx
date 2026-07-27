@@ -9,6 +9,7 @@ export default function BottonBar({openAddModal, openInfoModal}) {
             </button>
             <button onClick={openAddModal} className='task-button flex-center add'>
                 <Plus />
+                <p>Add task</p>
             </button>
       </div>
     )
