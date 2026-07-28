@@ -1,17 +1,17 @@
 .bottom-bar {
-    position: fixed;
-    bottom: var(--space-xxl);
     display: flex;
-    gap: var(--space-xl);
-    margin: 0 auto;
     width: 90%;
-    justify-content: center;
-    align-items: center;
+    margin: 0 auto;
+    gap: var(--space-md);
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
 }
 
 .task-button {
     z-index: 1 ;
-    width: var(--button);
+    width: 60px;
     height: var(--button);
     border-radius: var(--radius-lg);
     background-color: var(--surface);
@@ -28,8 +28,7 @@
 .task-button.add {
     background-color: var(--primary);
     color: var(--text);
-    width: fit-content;
-    padding: 25px;
+    width: 100%;
     font-weight: bold;
     gap: 10px;
 }
