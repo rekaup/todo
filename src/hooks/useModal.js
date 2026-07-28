@@ -4,17 +4,20 @@ export function useModal() {
     const [modalMode, setModalMode] = useState(null)
     const [modalTaskId, setModalTaskId] = useState(null)
     const [modalText, setModalText] = useState('')
+    const [modalCategoryID, setModalCategoryId] = useState(null)
 
     function openAddModal() {
         setModalMode('add')
         setModalText('')
         setModalTaskId(null)
+        setModalCategoryId(null)
     }
 
     function openEditMode(task){
         setModalMode('edit')
         setModalText(task.text)
         setModalTaskId(task.id)
+        setModalCategoryId(task.categoryId ?? null)
     }
 
     function closeModal() {
@@ -31,5 +34,7 @@ export function useModal() {
         openAddModal,
         openEditMode,
         closeModal,
+        modalCategoryID,
+        setModalCategoryId,
     }
 }

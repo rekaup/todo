@@ -2,16 +2,20 @@
     gap: var(--space-md);
     width: 90%;
     margin: var(--space-md) auto;
-    color: var(--text-secondary);
-    margin-bottom: var(--space-xxl);
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    background-color: var(--surface);
 }
 
 .task-container {
-    gap: var(--space-xl);
+    justify-content: space-around;
+    gap: var(--space-sm);
+    align-items: center;
 }
 
 .active-tasks-container, .completed-tasks-container {
     gap: var(--space-xs);
+    align-items: center;
 }
 
 .progress-bar {
@@ -26,4 +30,9 @@
   background: var(--primary);
   border-radius: var(--radius-sm);
   transition: var(--transition);
+}
+
+.active-tasks, .completed-tasks {
+    color: var(--primary);
+    font-size: 30px;
 }

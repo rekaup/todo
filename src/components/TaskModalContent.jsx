@@ -1,11 +1,12 @@
 import { Plus, Check, Trash2, X } from 'lucide-react';
 import { useRef, useLayoutEffect } from 'react';
 import Divider from "../layout/Divider"
+import CategoryPicker from './CategoryPicker';
 import '../styles/components/Modal.css'
 
 
 
-export default function TaskModalContent({modalText, setModalText, handleSave, closeModal, modalMode, onDelete}) {
+export default function TaskModalContent({modalText, setModalText, handleSave, closeModal, modalMode, onDelete, categories, addCategory, selectedCategory, setSelectedCategory}) {
     const isEditMode = modalMode === 'edit'
     const isAddMode = modalMode === 'add'
     const textareaRef = useRef(null)
@@ -43,6 +44,12 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
                 autoFocus
                 />
             </div>
+            <CategoryPicker
+                categories={categories}
+                selectedId={selectedCategory}
+                onSelect={setSelectedCategory}
+                onCreate={addCategory}
+            />
             <Divider />
             <div className='modal-action-bar'>
                 <button onClick={handleSave} className={isEditMode ? 'modal-button edit flex-center w-full' : 'modal-button add flex-center w-full'}>

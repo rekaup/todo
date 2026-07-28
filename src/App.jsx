@@ -11,23 +11,35 @@ import './styles/components/App.css'
 import './styles/utilities.css'
 import BottonBar from './components/BottonBar'
 import AppInfoContent from './components/AppInfoContent'
+import { useCategories } from "./hooks/useCategories";
+import CategoryTabs from './components/CategoryTabs'
 
 function App() {
-  const {modalMode, modalTaskId, modalText, setModalMode, setModalTaskId, setModalText, openAddModal, openEditMode, closeModal} = useModal()
+  const {modalMode, modalTaskId, modalText, setModalMode, setModalTaskId, setModalText, openAddModal, openEditMode, closeModal, modalCategoryID, setModalCategoryId} = useModal()
   const {tasks, activeTasks, completedTasks, editTask, handleDelete, handleCheck, addTask} = useTasks()
+  const {categories, addCategory, getCategoryById} = useCategories()
   const totalTask = tasks.length
   const progressPercent = totalTask === 0 ? 0 : Math.round((completedTasks.length / totalTask) * 100)
   const [inInfoOpen, setIsInfoOpen] = useState(false)
+  const [activeCategory, setAcriveCategory] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState(null)
+  const filteredActiveTasks = activeTasks.filter(task =>
+    activeCategory === null || task.categoryId === activeCategory
+  )
 
-  function handleSave() {
-    if (modalText.trim() == '') return
+  const filteredCompletedTasks = completedTasks.filter(task =>
+    activeCategory === null || task.categoryId === activeCategory
+  )
+
+function handleSave() {
+    if (modalText.trim() === '') return
     if (modalMode === 'add') {
-      addTask(modalText)
-    } else if(modalMode === 'edit') {
-      editTask(modalTaskId, modalText)
+        addTask(modalText, modalCategoryID)
+    } else {
+        editTask(modalTaskId, modalText, modalCategoryID)
     }
     closeModal()
-  }
+}
 
   return (
     <div className="main">
@@ -36,13 +48,19 @@ function App() {
       warningText={"Пользуйтесь только на одном устройстве, иначе данные могут не сохраниться"
       }/>
 
-      <Header/>
-      <AppTaskCounter 
+      <Header
+        openInfoModal={() => setIsInfoOpen(true)} 
+      />
+      {/* <AppTaskCounter 
       activeCount={activeTasks.length} 
       completedCount={completedTasks.length} 
       progressPercent={progressPercent}
+      /> */}
+      <CategoryTabs 
+      categories={categories}
+      activeId={activeCategory}
+      onChange={setAcriveCategory}
       />
-
       <AppModal isOpen={modalMode != null} onClose={closeModal}>
         <TaskModalContent
         modalText={modalText}
@@ -51,6 +69,10 @@ function App() {
         closeModal={closeModal}
         modalMode={modalMode}
         onDelete={()=> {handleDelete(modalTaskId); closeModal()}}
+        categories={categories}
+        addCategory={addCategory}
+        selectedCategory={modalCategoryID}
+        setSelectedCategory={setModalCategoryId}
         />
       </AppModal>
       
@@ -59,34 +81,35 @@ function App() {
       </AppModal>
 
       <div className="task-lists flex-column">
-        <p className='task-list-title'>Active Tasks</p>
-        {activeTasks.map((task) => (
-        <TaskItem
-          key={task.id}
-          task={task}
-          onCheck={handleCheck}
-          onDelete={handleDelete}
-          onEdit={openEditMode}
-        />
+        <p className="task-list-title">Active Tasks</p>
+
+        {filteredActiveTasks.map((task) => (
+          <TaskItem
+            key={task.id}
+            task={task}
+            category={getCategoryById(task.categoryId)}
+            onCheck={handleCheck}
+            onEdit={openEditMode}
+          />
         ))}
       </div>
 
       <div className="task-lists flex-column completed">
-        <p className='task-list-title'>Completed Tasks</p>
-        {completedTasks.map((task) => (
-        <TaskItem
-          key={task.id}
-          task={task}
-          onCheck={handleCheck}
-          onDelete={handleDelete}
-          onEdit={openEditMode}
-        />
+        <p className="task-list-title">Completed Tasks</p>
+
+        {filteredCompletedTasks.map((task) => (
+          <TaskItem
+            key={task.id}
+            task={task}
+            category={getCategoryById(task.categoryId)}
+            onCheck={handleCheck}
+            onEdit={openEditMode}
+          />
         ))}
       </div>
 
       <BottonBar 
-        openAddModal={openAddModal} 
-        openInfoModal={() => setIsInfoOpen(true)} 
+        openAddModal={openAddModal}
       />
     </div>
   )

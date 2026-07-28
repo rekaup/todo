@@ -22,5 +22,13 @@
 }
 
 .app-version {
-    color: var(--text-secondary)
+    color: var(--text-secondary);
+}
+
+.header-container {
+    gap: var(--space-xs);
+}
+
+.header-container p{
+    color: var(--text-secondary);
 }

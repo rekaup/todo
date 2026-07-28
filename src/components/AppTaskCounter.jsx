@@ -2,21 +2,30 @@ import '../styles/components/TaskCounter.css'
 
 export default function AppTaskCounter({ activeCount, completedCount, progressPercent }) {
   return (
-    <div className="task-counter flex-column">
+    <div className="task-counter">
+
       <div className='task-container flex'>
         <div className="active-tasks-container flex">
           <span className="active-tasks">{activeCount}</span>
-          <span className="task-count">progress</span>
+          <span className="task-count">active</span>
         </div>
         <div className="completed-tasks-container flex">
           <span className="completed-tasks">{completedCount}</span>
           <span className="task-count">done</span>
         </div>
       </div>
-      <div className='progress-bar'>
+      {task.categoryId && (
+        <span>
+          {getCategoryById(task.categoryId)}
+        </span>
+      )}
+
+      
+
+      {/* <div className='progress-bar'>
         <div className='progress-fill' style={{width: `${progressPercent}%`}}>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

@@ -64,13 +64,19 @@ export function useTasks() {
         setTasks(newTasks)
     }
 
-    function addTask(text) {
-        const newTask = {id: Date.now(), text, completed: false}
-        setTasks([...tasks, newTask])
+    function addTask(text, categoryId) {
+        const newTask = {
+            id: Date.now(),
+            text,
+            completed: false,
+            categoryId,
+        }
+
+        setTasks(prev => [...prev, newTask])
     }
 
-    function editTask(id, newText){
-        const newTasks = tasks.map((task) => task.id === id ? {...task, text: newText} : task)
+    function editTask(id, newText, categoryId){
+        const newTasks = tasks.map((task) => task.id === id ? {...task, text: newText, categoryId,} : task)
         setTasks(newTasks)
     }
   
