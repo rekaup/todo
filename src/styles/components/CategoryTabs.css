@@ -9,6 +9,7 @@
     gap: var(--space-sm);
     width: 90%;
     margin-bottom: var(--space-sm);
+    flex-wrap: wrap;
 }
 
 .category-tab {

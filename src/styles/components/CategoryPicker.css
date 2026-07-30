@@ -44,16 +44,29 @@
     padding: var(--space-sm) var(--space-xl);
 }
 
+.category-picker {
+    margin: 0 auto;
+    gap: 5px;
+    width: 100%;
+}
+
 .category-create-form {
     display: flex;
-    align-items: center;
     flex-direction: column;
-    background-color: --;
+    background-color: var(--surface-2);
+    padding: var(--space-xl) var(--space-sm);
+    border-radius: var(--radius-sm);
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    gap: var(--space-xl);
 }
 
 .category-create-form.color-picker {
     display: flex;
     flex-direction: row;
+    gap: 5px;
+    width: 90%;
 }
 
 .button.color-picker {
@@ -61,4 +74,35 @@
     width: 28px;
     height: 28px;
     border-radius: "50%";
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.button.add {
+    background-color: var(--primary);
+    padding: var(--space-sm) var(--space-xxl);
+    width: 100%;
+}
+
+.button.cansel {
+    width: 100%;
+}
+
+.input-create-form {
+    width: 90%;
+    margin: 0 auto;
+    background-color: var(--surface);
+    padding: var(--space-md);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+}
+
+.input-create-form:focus {
+    outline: none;
 }

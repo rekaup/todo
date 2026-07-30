@@ -57,11 +57,12 @@ export default function CategoryPicker({categories, selectedId, onSelect, onCrea
                     <div className="category-create-form">
                         <input 
                         autoFocus
-                        placeholder="321"
+                        placeholder="enter category name"
                         value={newName}
                         onChange={(e)=> setNewName(e.target.value)}
+                        className="input-create-form"
                         />
-                        <div className="category-create-form color-picker">
+                        {/* <div className="category-create-form color-picker">
                             {COLOR_PALETTE.map(color => (
                             <button
                                 key={color}
@@ -73,13 +74,15 @@ export default function CategoryPicker({categories, selectedId, onSelect, onCrea
                                 {newColor === color && <Check size={16} />}
                             </button>
                             ))}
+                        </div> */}
+                        <div className="button-container">
+                            <button type="button" onClick={handleCreate} className="button add">
+                                Add
+                            </button>
+                            <button type="button" onClick={()=>setIsCreating(false)} className="button cansel">
+                                Censel
+                            </button>
                         </div>
-                        <button type="button" onClick={handleCreate} className="button add">
-                            Add
-                        </button>
-                        <button type="button" onClick={()=>setIsCreating(false)} className="button cansel">
-                            Censel
-                        </button>
                     </div>
                 )}
             </div>
