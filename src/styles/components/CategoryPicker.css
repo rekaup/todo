@@ -1,0 +1,64 @@
+.button.category.active {
+    background-color: var(--primary);
+    color: var(--text);
+}
+
+.button.category {
+    background-color: var(--surface-2);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    justify-content: center;
+}
+
+.button.category, .button.plus {
+    height: 35px;
+}
+
+.category-picker {
+    display: flex;
+    gap: var(--space-xs);
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.button.delete {
+    background: none;
+    color: var(--text-secondary);
+    padding: 0;
+}
+
+.button.category.active .button.delete {
+    color: var(--text);
+}
+
+.button {
+    background-color: var(--surface-2);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    display: flex;
+    padding: var(--space-sm) var(--space-xl);
+}
+
+.category-create-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: --;
+}
+
+.category-create-form.color-picker {
+    display: flex;
+    flex-direction: row;
+}
+
+.button.color-picker {
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: "50%";
+}

@@ -1,6 +1,8 @@
+import '../styles/components/CategoryTabs.css'
+
 export default function CategoryTabs({ categories, activeId, onChange}) {
     return (
-        <div>
+        <div className="category-tabs-container">
             <button
             className={`category-tab ${activeId === null ? 'active' : ''}`}
             onClick={() => onChange(null)}
@@ -11,7 +13,7 @@ export default function CategoryTabs({ categories, activeId, onChange}) {
                 <button
                     key={category.id}
                     onClick={() => onChange(category.id)}
-                    className={activeId === category.id ? "active" : ""}
+                    className={activeId === category.id ? "category-tab active" : "category-tab"}
                 >
                     {category.name}
                 </button>

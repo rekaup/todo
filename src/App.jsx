@@ -16,8 +16,8 @@ import CategoryTabs from './components/CategoryTabs'
 
 function App() {
   const {modalMode, modalTaskId, modalText, setModalMode, setModalTaskId, setModalText, openAddModal, openEditMode, closeModal, modalCategoryID, setModalCategoryId} = useModal()
-  const {tasks, activeTasks, completedTasks, editTask, handleDelete, handleCheck, addTask} = useTasks()
-  const {categories, addCategory, getCategoryById} = useCategories()
+  const { categories, addCategory, getCategoryById, deleteCategory } = useCategories();
+  const { tasks, activeTasks, completedTasks, editTask, handleDelete, handleCheck, addTask, clearCategoryFromTasks } = useTasks();
   const totalTask = tasks.length
   const progressPercent = totalTask === 0 ? 0 : Math.round((completedTasks.length / totalTask) * 100)
   const [inInfoOpen, setIsInfoOpen] = useState(false)
@@ -31,15 +31,20 @@ function App() {
     activeCategory === null || task.categoryId === activeCategory
   )
 
-function handleSave() {
-    if (modalText.trim() === '') return
-    if (modalMode === 'add') {
-        addTask(modalText, modalCategoryID)
-    } else {
-        editTask(modalTaskId, modalText, modalCategoryID)
-    }
-    closeModal()
-}
+  function handleSave() {
+      if (modalText.trim() === '') return
+      if (modalMode === 'add') {
+          addTask(modalText, modalCategoryID)
+      } else {
+          editTask(modalTaskId, modalText, modalCategoryID)
+      }
+      closeModal()
+  }
+  function handleDeleteCategory(id) {
+    deleteCategory(id)
+    clearCategoryFromTasks(id)
+    if (activeCategory === id) setActiveCategory(null)
+  }
 
   return (
     <div className="main">
@@ -73,6 +78,7 @@ function handleSave() {
         addCategory={addCategory}
         selectedCategory={modalCategoryID}
         setSelectedCategory={setModalCategoryId}
+        onDeleteCategory={handleDeleteCategory}
         />
       </AppModal>
       

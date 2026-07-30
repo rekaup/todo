@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: space-between;
     margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
 }
 
 .app-header p, h1 {

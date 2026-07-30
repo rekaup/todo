@@ -1,5 +1,6 @@
 import { useState } from "react"
-import { Check, Plus } from "lucide-react"
+import { Check, Plus, X } from "lucide-react"
+import '../styles/components/CategoryPicker.css'
 
 const COLOR_PALETTE = [
     "#4d2b9c",
@@ -12,7 +13,7 @@ const COLOR_PALETTE = [
     "#0984e3",
 ];
 
-export default function CategoryPicker({categories, selectedId, onSelect, onCreate }) {
+export default function CategoryPicker({categories, selectedId, onSelect, onCreate, onDeleteCategory }) {
     const [isCreating, setIsCreating] = useState(false)
     const [newName, setNewName] = useState('')
     const [newColor, setNewColor] = useState(COLOR_PALETTE[0])
@@ -26,53 +27,58 @@ export default function CategoryPicker({categories, selectedId, onSelect, onCrea
     }
 
     return(
-        <div>
-            <h1>321</h1>
-            <div>
+        <div className="category-picker">
+            <div className="category-picker main picker">
                 {categories.map(cat => (
                 <button
                     key={cat.id}
                     type="button"
                     onClick={() => onSelect(cat.id)}
-                    className={selectedId === cat.id ? "active" : ""}
+                    className={selectedId === cat.id ? "button category active" : "button category"}
                 >
-                    {cat.name}
+                    <p>{cat.name}</p>
+                    <span
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onDeleteCategory(cat.id)
+                        }}
+                        className="button delete"
+                    >
+                        <X size={14}/>
+                    </span>
                 </button>
                 ))}
-                <button type="button" onClick={()=>setIsCreating(true)}>
+                <button type="button" onClick={()=>setIsCreating(true)} className="button plus">
                     <Plus />
                 </button>
+            </div>
+            <div className="category-picker main creater">
                 {isCreating && (
-                    <div>
+                    <div className="category-create-form">
                         <input 
                         autoFocus
                         placeholder="321"
                         value={newName}
                         onChange={(e)=> setNewName(e.target.value)}
                         />
-                        <div>
+                        <div className="category-create-form color-picker">
                             {COLOR_PALETTE.map(color => (
                             <button
                                 key={color}
                                 type="button"
                                 onClick={() => setNewColor(color)}
-                                style={{
-                                    background: color,
-                                    width: 28,
-                                    height: 28,
-                                    borderRadius: "50%",
-                                    border:
-                                        newColor === color
-                                            ? "2px solid white"
-                                            : "none"
-                                }}
+                                className="button color-picker"
+                                style={{background: color}}
                             >
                                 {newColor === color && <Check size={16} />}
                             </button>
                             ))}
                         </div>
-                        <button type="button" onClick={handleCreate}>
+                        <button type="button" onClick={handleCreate} className="button add">
                             Add
+                        </button>
+                        <button type="button" onClick={()=>setIsCreating(false)} className="button cansel">
+                            Censel
                         </button>
                     </div>
                 )}

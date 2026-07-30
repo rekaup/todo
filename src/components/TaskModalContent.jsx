@@ -6,7 +6,7 @@ import '../styles/components/Modal.css'
 
 
 
-export default function TaskModalContent({modalText, setModalText, handleSave, closeModal, modalMode, onDelete, categories, addCategory, selectedCategory, setSelectedCategory}) {
+export default function TaskModalContent({modalText, setModalText, handleSave, closeModal, modalMode, onDelete, categories, addCategory, selectedCategory, setSelectedCategory, onDeleteCategory}) {
     const isEditMode = modalMode === 'edit'
     const isAddMode = modalMode === 'add'
     const textareaRef = useRef(null)
@@ -49,6 +49,7 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
                 selectedId={selectedCategory}
                 onSelect={setSelectedCategory}
                 onCreate={addCategory}
+                onDeleteCategory={onDeleteCategory}
             />
             <Divider />
             <div className='modal-action-bar'>

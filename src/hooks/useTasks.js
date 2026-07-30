@@ -1,12 +1,7 @@
 import { useState, useEffect } from "react";
 import initialTasks from "../task";
+import { getCloudStorage } from "./cloudStorage";
 
-function getCloudStorage() {
-    const tg = window.Telegram?.WebApp
-    if (!tg) return null
-    const isSupported = tg.isVersionAtLeast ? tg.isVersionAtLeast('6.9') : false
-    return isSupported ? tg.CloudStorage : null
-}
 
 export function useTasks() {
     const [tasks, setTasks] = useState(initialTasks)
@@ -79,6 +74,14 @@ export function useTasks() {
         const newTasks = tasks.map((task) => task.id === id ? {...task, text: newText, categoryId,} : task)
         setTasks(newTasks)
     }
+
+    function clearCategoryFromTasks(categoryId) {
+    setTasks(prev =>
+        prev.map(task =>
+        task.categoryId === categoryId ? { ...task, categoryId: null } : task
+        )
+    )
+    }
   
   const activeTasks = tasks.filter((task)=> !task.completed)
   const completedTasks = tasks.filter((task)=> task.completed)
@@ -91,5 +94,6 @@ export function useTasks() {
     handleDelete,
     handleCheck,
     addTask,
+    clearCategoryFromTasks,
   }
 }
