@@ -1,8 +1,9 @@
 import '../styles/components/CategoryTabs.css'
-import { Plus } from 'lucide-react'
+import '../styles/components/CategoryPicker.css'
+import { Plus, X } from 'lucide-react'
 
 
-export default function CategoryTabs({ categories, activeId, onChange, onAddCategory}) {
+export default function CategoryTabs({ categories, activeId, onChange, onAddCategory, onDeleteCategory }) {
     return (
         <div className="category-tabs-container">
             <button className="category-tabs-add" onClick={onAddCategory}>
@@ -21,6 +22,17 @@ export default function CategoryTabs({ categories, activeId, onChange, onAddCate
                     className={activeId === category.id ? "category-tab active" : "category-tab"}
                 >
                     {category.name}
+                    {activeId === category.id && (
+                        <span
+                            className={activeId === category.id ? "category-tab-delete active" : "category-tab-delete"}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onDeleteCategory(category.id);
+                            }}
+                        >
+                            <X size={14} />
+                        </span>
+                    )}
                 </button>
             ))}
         </div>

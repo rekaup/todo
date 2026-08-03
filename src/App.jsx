@@ -70,6 +70,7 @@ function App() {
       activeId={activeCategory}
       onChange={setAcriveCategory}
       onAddCategory={() => setIsCreatingCategory(true)}
+      onDeleteCategory={handleDeleteCategory}
       />
 
       <AppModal isOpen={modalMode != null} onClose={closeModal}>
