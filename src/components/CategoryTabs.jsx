@@ -1,8 +1,13 @@
 import '../styles/components/CategoryTabs.css'
+import { Plus } from 'lucide-react'
 
-export default function CategoryTabs({ categories, activeId, onChange}) {
+
+export default function CategoryTabs({ categories, activeId, onChange, onAddCategory}) {
     return (
         <div className="category-tabs-container">
+            <button className="category-tabs-add" onClick={onAddCategory}>
+            <Plus />
+            </button>
             <button
             className={`category-tab ${activeId === null ? 'active' : ''}`}
             onClick={() => onChange(null)}

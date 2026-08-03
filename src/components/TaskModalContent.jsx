@@ -6,7 +6,7 @@ import '../styles/components/Modal.css'
 
 
 
-export default function TaskModalContent({modalText, setModalText, handleSave, closeModal, modalMode, onDelete, categories, addCategory, selectedCategory, setSelectedCategory, onDeleteCategory}) {
+export default function TaskModalContent({modalText, setModalText, handleSave, closeModal, modalMode, onDelete, categories, addCategory, selectedCategory, setSelectedCategory, onDeleteCategory, onOpenManager}) {
     const isEditMode = modalMode === 'edit'
     const isAddMode = modalMode === 'add'
     const textareaRef = useRef(null)
@@ -48,8 +48,8 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
                 categories={categories}
                 selectedId={selectedCategory}
                 onSelect={setSelectedCategory}
-                onCreate={addCategory}
                 onDeleteCategory={onDeleteCategory}
+                onOpenManager={onOpenManager}
             />
             <Divider />
             <div className='modal-action-bar'>
@@ -57,7 +57,7 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
                     {isEditMode ? <span className='edit'><Check size={20} /> Complete</span> : <span className='add'><Plus size={20} />Add</span>}
                 </button>
                 {isAddMode && (
-                    <button onClick={closeModal} className='modal-button censel flex-center w-full'>Cancel</button>
+                    <button onClick={closeModal} className='modal-button cancel flex-center w-full'>Cancel</button>
                 )}
                 {isEditMode && 
                     <button onClick={onDelete} className='modal-button delete flex-center w-full'>

@@ -9,10 +9,13 @@ import TaskModalContent from './components/TaskModalContent'
 import AppWarning from './components/AppWarning'
 import './styles/components/App.css'
 import './styles/utilities.css'
+import './styles/components/CategoryPicker.css'
 import BottonBar from './components/BottonBar'
 import AppInfoContent from './components/AppInfoContent'
 import { useCategories } from "./hooks/useCategories";
 import CategoryTabs from './components/CategoryTabs'
+import { Plus } from 'lucide-react'
+import CategoryManagerContent from './components/CategoryManagerContent'
 
 function App() {
   const {modalMode, modalTaskId, modalText, setModalMode, setModalTaskId, setModalText, openAddModal, openEditMode, closeModal, modalCategoryID, setModalCategoryId} = useModal()
@@ -23,6 +26,7 @@ function App() {
   const [inInfoOpen, setIsInfoOpen] = useState(false)
   const [activeCategory, setAcriveCategory] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState(null)
+  const [isCreatingCategory, setIsCreatingCategory] = useState(false)
   const filteredActiveTasks = activeTasks.filter(task =>
     activeCategory === null || task.categoryId === activeCategory
   )
@@ -65,7 +69,9 @@ function App() {
       categories={categories}
       activeId={activeCategory}
       onChange={setAcriveCategory}
+      onAddCategory={() => setIsCreatingCategory(true)}
       />
+
       <AppModal isOpen={modalMode != null} onClose={closeModal}>
         <TaskModalContent
         modalText={modalText}
@@ -79,6 +85,14 @@ function App() {
         selectedCategory={modalCategoryID}
         setSelectedCategory={setModalCategoryId}
         onDeleteCategory={handleDeleteCategory}
+        onOpenManager={() => setIsCreatingCategory(true)}
+        />
+      </AppModal>
+
+            <AppModal isOpen={isCreatingCategory} onClose={() => setIsCreatingCategory(false)}>
+        <CategoryManagerContent
+          onCreate={addCategory}
+          closeModal={() => setIsCreatingCategory(false)}
         />
       </AppModal>
       

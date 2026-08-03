@@ -87,7 +87,7 @@
     color: var(--primary);
 }
 
-.modal-button.censel:hover {
+.modal-button.cancel:hover {
     background: #ffffff0f;
     color: var(--text);
 }
@@ -110,7 +110,7 @@
     background-color: var(--warning);
 }
 
-.modal-button.censel {
+.modal-button.cancel {
     background-color: var(--surface-2);
     color: var(--primary);
 }

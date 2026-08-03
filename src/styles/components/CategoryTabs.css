@@ -9,7 +9,15 @@
     gap: var(--space-sm);
     width: 90%;
     margin-bottom: var(--space-sm);
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-shrink: 0;
+    min-width: 0;
+}
+
+.category-tabs-container::-webkit-scrollbar{
+    display: none;
 }
 
 .category-tab {
@@ -19,6 +27,8 @@
     color: var(--text-secondary);
     transition: var(--animation-normal);
     animation: var(--animation-normal);
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .category-tab:hover {
@@ -29,4 +39,16 @@
 .category-tab.active:hover {
     background-color: var(--text);
     color: var(--primary);
+}
+
+.category-tabs-add {
+    background-color: var(--surface);
+    border-radius: 50%;
+    padding: var(--space-sm);
+    color: var(--text-secondary);
+    transition: var(--animation-normal);
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
 }
