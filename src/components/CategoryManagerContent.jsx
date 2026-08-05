@@ -49,12 +49,13 @@ export default function CategoryManagerContent({ onCreate, onUpdate, editingCate
                 <h3 className="modal-title">{isEditing ? 'Edit Category' : 'Create Category'}</h3>
             </div>
             <div className="modal-body">
-                <input
+                <textarea
                     type="text"
-                    placeholder="Category Name"
+                    placeholder={isEditing ? "Edit category" : "Category name"}
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
                     className="input-create-form"
+                    autoFocus
                 />
 
                 <div className="button-container">

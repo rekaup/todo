@@ -134,18 +134,3 @@
 .button.cansel {
     width: 100%;
 }
-
-.input-create-form {
-    width: 100%;
-    margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.04);
-    padding: var(--space-md);
-    border-radius: var(--radius-sm);
-    color: var(--text);
-    border: none;
-    box-sizing: border-box;
-}
-
-.input-create-form:focus {
-    outline: none;
-}
