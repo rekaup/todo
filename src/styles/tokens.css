@@ -1,12 +1,12 @@
 :root {
     --bg: #000;
-    --surface: #1b1b1d;
+    --surface: #191919;
     --surface-2: #2d2d2f;
     --task-bg: #060708;
     --primary: #2961b6;
     --danger: #ff0000;
     --text: #fff;
-    --text-secondary: #4b4b4b;
+    --text-secondary: #8C8C8C;
     --divider: #2d2d2f;
 
     --radius-cb: 5px;
@@ -19,7 +19,7 @@
     --space-md: 12px;
     --space-lg: 16px;
     --space-xl: 20px;
-    --space-xxl: 30px;
+    --space-xxl: 34px;
 
     --button: 48px;
 

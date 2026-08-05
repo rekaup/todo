@@ -1,26 +1,59 @@
-import { X, Plus } from "lucide-react"
+import { Plus } from "lucide-react"
+import { RadioGroup } from '@headlessui/react'
 import '../styles/components/CategoryPicker.css'
+import { useRef } from 'react'
 
+export default function CategoryPicker({ categories, selectedId, onSelect, onOpenManager, onLongPressCategory }) {
+    const longPressTimerRef = useRef({})
 
+    const clearLongPressTimer = (categoryId) => {
+        const timer = longPressTimerRef.current[categoryId]
+        if (timer) {
+            window.clearTimeout(timer)
+            delete longPressTimerRef.current[categoryId]
+        }
+    }
 
-export default function CategoryPicker({categories, selectedId, onSelect, onDeleteCategory, onOpenManager}) {
+    const handleLongPressStart = (categoryId) => {
+        const timer = window.setTimeout(() => {
+            onLongPressCategory?.(categoryId)
+            clearLongPressTimer(categoryId)
+        }, 420)
 
-    return(
+        longPressTimerRef.current[categoryId] = timer
+    }
+
+    return (
         <div className="category-picker">
             <div className="category-picker main picker">
                 <button type="button" className="button plus" onClick={onOpenManager}>
                     <Plus />
                 </button>
-                {categories.map((category) => (
-                    <button
-                        key={category.id}
-                        type="button"
-                        className={selectedId === category.id ? "button category active" : "button category"}
-                        onClick={selectedId === category.id ? () => onSelect(null) : () => onSelect(category.id)}
-                    >
-                        <p>{category.name}</p>
-                    </button>
-                ))}
+
+                <RadioGroup
+                    value={selectedId}
+                    onChange={(value) => onSelect(selectedId === value ? null : value)}
+                    className="category-picker-list"
+                >
+                    {categories.map((category) => (
+                        <RadioGroup.Option
+                            key={category.id}
+                            value={category.id}
+                            className={({ checked }) =>
+                                checked ? 'button category active' : 'button category'
+                            }
+                            onPointerDown={() => handleLongPressStart(category.id)}
+                            onPointerUp={() => clearLongPressTimer(category.id)}
+                            onPointerLeave={() => clearLongPressTimer(category.id)}
+                            onPointerCancel={() => clearLongPressTimer(category.id)}
+                            onContextMenu={(e) => e.preventDefault()}
+                        >
+                            {({ checked }) => (
+                                <span>{category.name}</span>
+                            )}
+                        </RadioGroup.Option>
+                    ))}
+                </RadioGroup>
             </div>
         </div>
     )

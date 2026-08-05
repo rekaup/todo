@@ -1,12 +1,11 @@
 import { Plus, Check, Trash2, X } from 'lucide-react';
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect, useEffect } from 'react';
 import Divider from "../layout/Divider"
-import CategoryPicker from './CategoryPicker';
 import '../styles/components/Modal.css'
+import CategoryPicker from './CategoryPicker';
 
 
-
-export default function TaskModalContent({modalText, setModalText, handleSave, closeModal, modalMode, onDelete, categories, addCategory, selectedCategory, setSelectedCategory, onDeleteCategory, onOpenManager}) {
+export default function TaskModalContent({modalText, setModalText, handleSave, closeModal, modalMode, onDelete, categories, addCategory, selectedCategory, setSelectedCategory, onDeleteCategory, onOpenManager, onLongPressCategory}) {
     const isEditMode = modalMode === 'edit'
     const isAddMode = modalMode === 'add'
     const textareaRef = useRef(null)
@@ -16,11 +15,55 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
         el.style.height = `${el.scrollHeight}px`;
     };
 
+    const focusInputWhenKeyboardOpens = () => {
+        const textarea = textareaRef.current
+        if (!textarea) return
+
+        window.requestAnimationFrame(() => {
+            textarea.scrollIntoView({ block: 'center', behavior: 'smooth' })
+
+            const viewport = window.visualViewport
+            if (!viewport) {
+                textarea.focus()
+                return
+            }
+
+            const viewportBottom = viewport.height + viewport.offsetTop
+            const textareaBottom = textarea.getBoundingClientRect().bottom
+            if (textareaBottom > viewportBottom - 24) {
+                window.scrollBy({ top: textareaBottom - viewportBottom + 24, behavior: 'smooth' })
+            }
+
+            textarea.focus()
+        })
+    }
+
     useLayoutEffect(() => {
         if (textareaRef.current) {
             resizeTextarea(textareaRef.current);
         }
     }, [modalText]);
+
+    useEffect(() => {
+        const textarea = textareaRef.current
+        if (!textarea) return
+
+        const focusTimer = window.requestAnimationFrame(() => {
+            focusInputWhenKeyboardOpens()
+        })
+
+        const handleViewportChange = () => {
+            focusInputWhenKeyboardOpens()
+        }
+
+        const viewport = window.visualViewport
+        viewport?.addEventListener('resize', handleViewportChange)
+
+        return () => {
+            window.cancelAnimationFrame(focusTimer)
+            viewport?.removeEventListener('resize', handleViewportChange)
+        }
+    }, [])
 
     const handleModalTextChange = (e) => {
         setModalText(e.target.value);
@@ -42,6 +85,7 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
                 onChange={handleModalTextChange}
                 className='modal-input w-full'
                 autoFocus
+                onFocus={focusInputWhenKeyboardOpens}
                 />
             </div>
             <CategoryPicker
@@ -50,6 +94,7 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
                 onSelect={setSelectedCategory}
                 onDeleteCategory={onDeleteCategory}
                 onOpenManager={onOpenManager}
+                onLongPressCategory={onLongPressCategory}
             />
             <Divider />
             <div className='modal-action-bar'>

@@ -61,13 +61,25 @@ export function useCategories() {
   }
 
   function deleteCategory(id) {
-  setCategories(prev => prev.filter(c => c.id !== id));
-}
+    setCategories(prev => prev.filter(c => c.id !== id));
+  }
 
+  function updateCategory(id, name, color) {
+    setCategories(prev => prev.map(category => {
+      if (category.id !== id) return category
+
+      return {
+        ...category,
+        name,
+        color,
+      }
+    }))
+  }
 
   return { 
     categories, 
     addCategory, 
+    updateCategory,
     getCategoryById, 
     deleteCategory,
 };

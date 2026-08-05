@@ -1,15 +1,17 @@
-.category-tab.active {
-    background-color: var(--primary);
-    color: var(--text);
-    transition: var(--animation-normal);
-}
-
 .category-tabs-container {
     margin: 0 auto;
     display: flex;
     gap: var(--space-sm);
     width: 90%;
     margin-bottom: var(--space-sm);
+    align-items: center;
+    min-width: 0;
+    overflow-x: auto;
+}
+
+.category-tabs-list {
+    display: flex;
+    gap: var(--space-sm);
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
@@ -17,50 +19,64 @@
     min-width: 0;
 }
 
-.category-tabs-container::-webkit-scrollbar{
+.category-tabs-list::-webkit-scrollbar {
     display: none;
 }
 
 .category-tab {
-    background-color: var(--surface);
+    background-color: rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-sm);
     padding: var(--space-sm) var(--space-xl);
     color: var(--text-secondary);
-    transition: var(--animation-normal);
-    animation: var(--animation-normal);
+    transition: var(--transition);
     flex-shrink: 0;
     white-space: nowrap;
     display: flex;
     align-items: center;
     gap: var(--space-xs);
+    border: none;
+    cursor: pointer;
 }
 
-.category-tab:hover {
-    background-color: var(--surface-2);
+.category-tab[aria-checked='true'] {
+    background-color: var(--primary);
     color: var(--text);
 }
 
-.category-tab.active:hover {
+.category-tab:hover {
+    background-color: rgba(255, 255, 255, 0.09);
+    color: var(--text);
+}
+
+.category-tab[aria-checked='true']:hover {
     background-color: var(--text);
     color: var(--primary);
 }
 
 .category-tabs-add {
-    background-color: var(--surface);
+    background-color: rgba(255, 255, 255, 0.05);
     border-radius: 50%;
     padding: var(--space-sm);
     color: var(--text-secondary);
-    transition: var(--animation-normal);
+    transition: var(--transition);
     align-items: center;
     display: flex;
     justify-content: center;
     flex-shrink: 0;
+    border: none;
+    cursor: pointer;
 }
 
 .category-tab-delete {
     margin-left: var(--space-xs);
-    transition: var(--animation-normal);
+    transition: var(--transition);
     display: flex;
     align-items: center;
     justify-content: center;
+    color: inherit;
+}
+
+.category-tabs-add:hover {
+    background-color: rgba(255, 255, 255, 0.09);
+    color: var(--text);
 }

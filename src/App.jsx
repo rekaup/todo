@@ -19,7 +19,7 @@ import CategoryManagerContent from './components/CategoryManagerContent'
 
 function App() {
   const {modalMode, modalTaskId, modalText, setModalMode, setModalTaskId, setModalText, openAddModal, openEditMode, closeModal, modalCategoryID, setModalCategoryId} = useModal()
-  const { categories, addCategory, getCategoryById, deleteCategory } = useCategories();
+  const { categories, addCategory, updateCategory, getCategoryById, deleteCategory } = useCategories();
   const { tasks, activeTasks, completedTasks, editTask, handleDelete, handleCheck, addTask, clearCategoryFromTasks } = useTasks();
   const totalTask = tasks.length
   const progressPercent = totalTask === 0 ? 0 : Math.round((completedTasks.length / totalTask) * 100)
@@ -27,6 +27,7 @@ function App() {
   const [activeCategory, setAcriveCategory] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [isCreatingCategory, setIsCreatingCategory] = useState(false)
+  const [editingCategoryId, setEditingCategoryId] = useState(null)
   const filteredActiveTasks = activeTasks.filter(task =>
     activeCategory === null || task.categoryId === activeCategory
   )
@@ -50,6 +51,21 @@ function App() {
     if (activeCategory === id) setActiveCategory(null)
   }
 
+  function openCreateCategoryModal() {
+    setEditingCategoryId(null)
+    setIsCreatingCategory(true)
+  }
+
+  function openEditCategoryModal(categoryId) {
+    setEditingCategoryId(categoryId)
+    setIsCreatingCategory(true)
+  }
+
+  function closeCategoryManager() {
+    setIsCreatingCategory(false)
+    setEditingCategoryId(null)
+  }
+
   return (
     <div className="main">
       
@@ -69,8 +85,9 @@ function App() {
       categories={categories}
       activeId={activeCategory}
       onChange={setAcriveCategory}
-      onAddCategory={() => setIsCreatingCategory(true)}
+      onAddCategory={openCreateCategoryModal}
       onDeleteCategory={handleDeleteCategory}
+      onLongPressCategory={openEditCategoryModal}
       />
 
       <AppModal isOpen={modalMode != null} onClose={closeModal}>
@@ -86,14 +103,17 @@ function App() {
         selectedCategory={modalCategoryID}
         setSelectedCategory={setModalCategoryId}
         onDeleteCategory={handleDeleteCategory}
-        onOpenManager={() => setIsCreatingCategory(true)}
+        onOpenManager={openCreateCategoryModal}
+        onLongPressCategory={openEditCategoryModal}
         />
       </AppModal>
 
-            <AppModal isOpen={isCreatingCategory} onClose={() => setIsCreatingCategory(false)}>
+            <AppModal isOpen={isCreatingCategory} onClose={closeCategoryManager}>
         <CategoryManagerContent
           onCreate={addCategory}
-          closeModal={() => setIsCreatingCategory(false)}
+          onUpdate={updateCategory}
+          editingCategory={categories.find((category) => category.id === editingCategoryId) ?? null}
+          closeModal={closeCategoryManager}
         />
       </AppModal>
       

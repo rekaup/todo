@@ -8,16 +8,14 @@
     margin-bottom: var(--space-sm);
 }
 
-.app-header p, h1 {
+.app-header p,
+.app-header h1 {
     margin: 0;
 }
 
 .debug {
     position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
     width: fit-content;
     height: fit-content;
 }
@@ -30,6 +28,77 @@
     gap: var(--space-xs);
 }
 
-.header-container p{
+.header-container p {
     color: var(--text-secondary);
+}
+
+.task-button.info {
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    color: var(--text);
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    padding: 0;
+    transition: var(--transition);
+}
+
+.task-button.info:hover {
+    background: var(--surface-2);
+}
+
+.user-menu {
+    position: relative;
+    display: inline-flex;
+}
+
+.user-menu-items {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    min-width: 190px;
+    background: rgba(27, 27, 29, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 6px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.user-menu-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--text);
+    border: none;
+    padding: 10px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+}
+
+.user-menu-item:hover,
+.user-menu-item[data-headlessui-state='active'],
+[data-headlessui-state='active'] .user-menu-item {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.user-menu-item:focus-visible {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.user-menu-item svg {
+    width: 16px;
+    height: 16px;
+    color: var(--text-secondary);
+}
+
+.user-menu-item .menu-label {
+    flex: 1;
 }

@@ -1,6 +1,6 @@
-import { useState } from "react"
-import { Check, Plus} from "lucide-react"
-import '../styles/components/CategoryPicker.css'
+import { useEffect, useState } from "react"
+import { Check } from "lucide-react"
+import { RadioGroup } from '@headlessui/react'
 import '../styles/components/Modal.css'
 
 const COLOR_PALETTE = [
@@ -12,23 +12,41 @@ const COLOR_PALETTE = [
     "#6c5ce7",
     "#2d3436",
     "#0984e3",
-];
+]
 
-export default function CategoryManagerContent({onCreate, closeModal, onOpenManager}) {
+export default function CategoryManagerContent({ onCreate, onUpdate, editingCategory, closeModal }) {
     const [newName, setNewName] = useState('')
     const [newColor, setNewColor] = useState(COLOR_PALETTE[0])
+    const isEditing = Boolean(editingCategory)
 
-    const handleCreate = () => {
+    useEffect(() => {
+        if (!editingCategory) {
+            setNewName('')
+            setNewColor(COLOR_PALETTE[0])
+            return
+        }
+
+        setNewName(editingCategory.name)
+        setNewColor(editingCategory.color ?? COLOR_PALETTE[0])
+    }, [editingCategory])
+
+    const handleSave = () => {
         if (!newName.trim()) return
-        const created = onCreate(newName.trim(), newColor)
+
+        if (isEditing) {
+            onUpdate(editingCategory.id, newName.trim(), newColor)
+        } else {
+            onCreate(newName.trim(), newColor)
+        }
+
         setNewName('')
         closeModal()
     }
 
-    return(
+    return (
         <>
             <div className="modal-header">
-                <h3 className="modal-title">Create Category</h3>
+                <h3 className="modal-title">{isEditing ? 'Edit Category' : 'Create Category'}</h3>
             </div>
             <div className="modal-body">
                 <input
@@ -38,22 +56,27 @@ export default function CategoryManagerContent({onCreate, closeModal, onOpenMana
                     onChange={(e) => setNewName(e.target.value)}
                     className="input-create-form"
                 />
-                {/* <div className="category-create-form color-picker">
+
+                <RadioGroup value={newColor} onChange={setNewColor} className="category-create-form color-picker">
                     {COLOR_PALETTE.map((color) => (
-                        <button
+                        <RadioGroup.Option
                             key={color}
-                            type="button"
+                            value={color}
                             className="button color-picker"
                             style={{ backgroundColor: color }}
-                            onClick={() => setNewColor(color)}
                         >
-                            {newColor === color && <Check size={16} color="#fff" />}
-                        </button>
+                            {({ checked }) => (
+                                <span className="flex-center">
+                                    {checked && <Check size={16} color="#fff" />}
+                                </span>
+                            )}
+                        </RadioGroup.Option>
                     ))}
-                </div> */}
+                </RadioGroup>
+
                 <div className="button-container">
-                    <button type='button' className="modal-button add flex-center w-full" onClick={handleCreate}>
-                        Add
+                    <button type='button' className="modal-button add flex-center w-full" onClick={handleSave}>
+                        {isEditing ? 'Save' : 'Add'}
                     </button>
                     <button type='button' className="modal-button cancel flex-center w-full" onClick={closeModal}>
                         Cancel
