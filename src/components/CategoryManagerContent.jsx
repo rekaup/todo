@@ -57,7 +57,7 @@ export default function CategoryManagerContent({ onCreate, onUpdate, editingCate
                     className="input-create-form"
                 />
 
-                <RadioGroup value={newColor} onChange={setNewColor} className="category-create-form color-picker">
+                {/* <RadioGroup value={newColor} onChange={setNewColor} className="category-create-form color-picker">
                     {COLOR_PALETTE.map((color) => (
                         <RadioGroup.Option
                             key={color}
@@ -72,7 +72,7 @@ export default function CategoryManagerContent({ onCreate, onUpdate, editingCate
                             )}
                         </RadioGroup.Option>
                     ))}
-                </RadioGroup>
+                </RadioGroup> */}
 
                 <div className="button-container">
                     <button type='button' className="modal-button add flex-center w-full" onClick={handleSave}>
