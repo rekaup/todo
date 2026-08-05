@@ -21,15 +21,17 @@
 .category-picker {
     display: flex;
     gap: var(--space-xs);
-    align-items: center;
-    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
 }
 
 .category-picker-list {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 5px;
+    min-width: 0;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .category-picker-list [role='radio'] {

@@ -1,7 +1,7 @@
 import '../styles/components/CategoryTabs.css'
 import '../styles/components/CategoryPicker.css'
 import { RadioGroup } from '@headlessui/react'
-import { Plus, X } from 'lucide-react'
+import { Plus, SquarePen } from 'lucide-react'
 import { useRef } from 'react'
 
 const ALL_VALUE = '__all__'
@@ -64,10 +64,10 @@ export default function CategoryTabs({ categories, activeId, onChange, onAddCate
                                         className="category-tab-delete"
                                         onClick={(e) => {
                                             e.stopPropagation()
-                                            onDeleteCategory(category.id)
+                                            onLongPressCategory?.(category.id)
                                         }}
                                     >
-                                        <X size={14} />
+                                        <SquarePen size={14} />
                                     </span>
                                 )}
                             </>

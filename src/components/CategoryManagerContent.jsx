@@ -14,7 +14,7 @@ const COLOR_PALETTE = [
     "#0984e3",
 ]
 
-export default function CategoryManagerContent({ onCreate, onUpdate, editingCategory, closeModal }) {
+export default function CategoryManagerContent({ onCreate, onUpdate, editingCategory, closeModal, onDelete }) {
     const [newName, setNewName] = useState('')
     const [newColor, setNewColor] = useState(COLOR_PALETTE[0])
     const isEditing = Boolean(editingCategory)
@@ -57,30 +57,27 @@ export default function CategoryManagerContent({ onCreate, onUpdate, editingCate
                     className="input-create-form"
                 />
 
-                {/* <RadioGroup value={newColor} onChange={setNewColor} className="category-create-form color-picker">
-                    {COLOR_PALETTE.map((color) => (
-                        <RadioGroup.Option
-                            key={color}
-                            value={color}
-                            className="button color-picker"
-                            style={{ backgroundColor: color }}
-                        >
-                            {({ checked }) => (
-                                <span className="flex-center">
-                                    {checked && <Check size={16} color="#fff" />}
-                                </span>
-                            )}
-                        </RadioGroup.Option>
-                    ))}
-                </RadioGroup> */}
-
                 <div className="button-container">
                     <button type='button' className="modal-button add flex-center w-full" onClick={handleSave}>
                         {isEditing ? 'Save' : 'Add'}
                     </button>
-                    <button type='button' className="modal-button cancel flex-center w-full" onClick={closeModal}>
-                        Cancel
-                    </button>
+                    {isEditing ? (
+                        <button
+                            type='button'
+                            className="modal-button delete flex-center w-full"
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                onDelete?.(editingCategory.id)
+                                closeModal()
+                            }}
+                        >
+                            Delete
+                        </button>
+                    ) : (
+                        <button type='button' className="modal-button cancel flex-center w-full" onClick={closeModal}>
+                            Cancel
+                        </button>
+                    )}
                 </div>
             </div>
         </>

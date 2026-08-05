@@ -24,7 +24,7 @@ function App() {
   const totalTask = tasks.length
   const progressPercent = totalTask === 0 ? 0 : Math.round((completedTasks.length / totalTask) * 100)
   const [inInfoOpen, setIsInfoOpen] = useState(false)
-  const [activeCategory, setAcriveCategory] = useState(null)
+  const [activeCategory, setActiveCategory] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [isCreatingCategory, setIsCreatingCategory] = useState(false)
   const [editingCategoryId, setEditingCategoryId] = useState(null)
@@ -48,7 +48,9 @@ function App() {
   function handleDeleteCategory(id) {
     deleteCategory(id)
     clearCategoryFromTasks(id)
-    if (activeCategory === id) setActiveCategory(null)
+    if (activeCategory === id) {
+      setActiveCategory(null)
+    }
   }
 
   function openCreateCategoryModal() {
@@ -84,7 +86,7 @@ function App() {
       <CategoryTabs 
       categories={categories}
       activeId={activeCategory}
-      onChange={setAcriveCategory}
+      onChange={setActiveCategory}
       onAddCategory={openCreateCategoryModal}
       onDeleteCategory={handleDeleteCategory}
       onLongPressCategory={openEditCategoryModal}
@@ -108,12 +110,16 @@ function App() {
         />
       </AppModal>
 
-            <AppModal isOpen={isCreatingCategory} onClose={closeCategoryManager}>
+      <AppModal isOpen={isCreatingCategory} onClose={closeCategoryManager}>
         <CategoryManagerContent
           onCreate={addCategory}
           onUpdate={updateCategory}
           editingCategory={categories.find((category) => category.id === editingCategoryId) ?? null}
           closeModal={closeCategoryManager}
+          onDelete={(id) => {
+            handleDeleteCategory(id)
+            closeCategoryManager()
+          }}
         />
       </AppModal>
       
