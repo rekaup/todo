@@ -12,6 +12,8 @@
     "deploy": "gh-pages -d dist -b main"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.10",
+    "antd": "^6.5.3",
     "lucide-react": "^1.25.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
