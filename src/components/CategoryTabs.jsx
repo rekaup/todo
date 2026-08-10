@@ -99,7 +99,10 @@ export default function CategoryTabs({ categories, activeId, onChange, onAddCate
                         key={category.id}
                         value={category.id}
                         ref={(element) => { tabRefs.current[category.id] = element }}
-                        className={({ checked }) => checked ? 'category-tab active' : 'category-tab'}
+                        className={({ checked }) => {
+                            const base = checked ? 'category-tab active' : 'category-tab'
+                            return menuState?.categoryId === category.id ? `${base} menu-target-active` : base
+                        }}
                         onPointerDown={(event) => handleLongPressStart(category.id, event)}
                         onPointerUp={() => clearLongPressTimer(category.id)}
                         onPointerLeave={() => clearLongPressTimer(category.id)}

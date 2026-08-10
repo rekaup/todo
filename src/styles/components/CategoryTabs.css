@@ -61,32 +61,42 @@
         width var(--animation-normal) cubic-bezier(.2, .8, .2, 1),
         opacity var(--animation-fast) ease;
 }
-
 .category-tab:hover {
     color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.category-drop-menu-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    border: none;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+    color: inherit;
 }
 
 .category-tabs-add {
-    background: none;
-    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
     padding: var(--space-sm);
-    color: var(--text-secondary);
-    transition: var(--transition);
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    flex-shrink: 0;
     border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text-secondary);
     cursor: pointer;
-}
-
-.category-tab-delete {
-    margin-left: var(--space-xs);
     transition: var(--transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: inherit;
 }
 
 .category-tabs-add:hover {
@@ -110,48 +120,35 @@
     position: fixed;
     z-index: 61;
     min-width: 164px;
-    padding: 6px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    background: var(--surface);
-    border: 1px solid var(--surface-2);
-    border-radius: var(--radius-md);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
     animation: categoryMenuIn 160ms ease both;
 }
 
-.category-menu-target {
-    position: fixed;
-    z-index: 60;
-    border-radius: var(--radius-sm);
-    background: transparent;
-    box-shadow: 0 0 0 100vmax #0000006b;
-    pointer-events: none;
-    animation: categoryBackdropIn 160ms ease both;
-}
-
 .category-drop-menu-item {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    width: 100%;
-    padding: var(--space-sm) var(--space-md);
-    border: none;
-    border-radius: var(--radius-sm);
-    background: transparent;
-    color: var(--text);
-    cursor: pointer;
-    text-align: left;
     font-size: 14px;
 }
 
-.category-drop-menu-item:hover {
-    background: var(--surface-2);
+.category-menu-dimmer {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+}
+
+.category-menu-dimmer-top,
+.category-menu-dimmer-bottom {
+    left: 0;
+    width: 100%;
 }
 
 .category-drop-menu-item.danger {
     color: var(--warning);
+}
+
+.category-tab.menu-target-active {
+    z-index: 62;
 }
 
 @keyframes categoryMenuIn {

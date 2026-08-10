@@ -59,6 +59,8 @@
     z-index: 0;
     pointer-events: none;
     animation: fadeIn var(--animation-fast) ease;
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
 }
 
 .user-menu-button.active {
@@ -76,36 +78,5 @@
     right: 0;
     top: calc(100% + 8px);
     min-width: fit-content;
-    background: var(--surface);
-    border: 1px solid var(--surface-2);
-    border-radius: 14px;
-    padding: 6px;
-    overflow: hidden;
     z-index: 2;
-}
-
-.user-menu-item {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: transparent;
-    color: var(--text);
-    border: none;
-    padding: 10px 12px;
-    border-radius: 10px;
-    cursor: pointer;
-    text-align: left;
-    font: inherit;
-}
-
-
-.user-menu-item svg {
-    width: 16px;
-    height: 16px;
-    color: var(--text-secondary);
-}
-
-.user-menu-item .menu-label {
-    flex: 1;
 }

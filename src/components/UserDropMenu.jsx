@@ -1,6 +1,7 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Info, LogOut, User } from 'lucide-react'
+import { Info, User } from 'lucide-react'
 import '../styles/components/Header.css'
+import '../styles/components/DropMenu.css'
 
 export default function UserDropMenu({ openInfoModal }) {
     return (
@@ -17,9 +18,9 @@ export default function UserDropMenu({ openInfoModal }) {
                             <User />
                         </MenuButton>
 
-                        <MenuItems className="user-menu-items">
+                        <MenuItems className="user-menu-items drop-menu">
                             <MenuItem>
-                                <button type="button" className="user-menu-item" onClick={openInfoModal}>
+                                <button type="button" className="user-menu-item drop-menu-item" onClick={openInfoModal}>
                                     <Info size={16} />
                                     <span className="menu-label">Info</span>
                                 </button>
