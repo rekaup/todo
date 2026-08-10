@@ -46,7 +46,7 @@
 }
 
 .category-tab[aria-checked='true'] {
-    color: var(--text);
+    color: var(--primary);
 }
 
 .category-tabs-indicator {
@@ -55,7 +55,7 @@
     left: 0;
     height: 100%;
     border-radius: var(--radius-sm);
-    background-color: var(--primary);
+    background-color: var(--primary-bg);
     pointer-events: none;
     transition: transform var(--animation-normal) cubic-bezier(.2, .8, .2, 1),
         width var(--animation-normal) cubic-bezier(.2, .8, .2, 1),
