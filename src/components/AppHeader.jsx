@@ -8,7 +8,7 @@ export default function Header({ openInfoModal }) {
             <div className='header-container flex-column'>
                 <h1 className='header-title'>todo</h1>
             </div>
-            <div className='task-button flex-center info'>
+            <div className='flex-center info'>
                 <UserDropMenu openInfoModal={openInfoModal} />
             </div>
         </header>

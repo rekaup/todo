@@ -1,4 +1,6 @@
 .app-header {
+    position: relative;
+    z-index: 20;
     width: 90%;
     margin: 0 auto;
     display: flex;
@@ -44,27 +46,23 @@
     transition: var(--transition);
 }
 
-.task-button.info:hover {
-    background: var(--surface-2);
-}
-
 .user-menu {
     position: relative;
     display: inline-flex;
+    z-index: 30;
 }
 
 .user-menu-items {
     position: absolute;
     right: 0;
     top: calc(100% + 8px);
-    min-width: 190px;
-    background: rgba(27, 27, 29, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    min-width: fit-content;
+    background: #1b1b1d;
+    border: none;
     border-radius: 14px;
     padding: 6px;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(10px);
     overflow: hidden;
+    z-index: 30;
 }
 
 .user-menu-item {
@@ -82,16 +80,6 @@
     font: inherit;
 }
 
-.user-menu-item:hover,
-.user-menu-item[data-headlessui-state='active'],
-[data-headlessui-state='active'] .user-menu-item {
-    background: rgba(255, 255, 255, 0.08);
-}
-
-.user-menu-item:focus-visible {
-    outline: none;
-    background: rgba(255, 255, 255, 0.12);
-}
 
 .user-menu-item svg {
     width: 16px;
