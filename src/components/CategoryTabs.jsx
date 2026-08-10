@@ -1,8 +1,9 @@
 import '../styles/components/CategoryTabs.css'
 import '../styles/components/CategoryPicker.css'
 import { RadioGroup } from '@headlessui/react'
-import { Plus, SquarePen } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { useLayoutEffect, useRef, useState } from 'react'
+import CategoryDropMenu from './CategoryDropMenu'
 
 const ALL_VALUE = '__all__'
 
@@ -12,6 +13,7 @@ export default function CategoryTabs({ categories, activeId, onChange, onAddCate
     const tabRefs = useRef({})
     const listRef = useRef(null)
     const [indicatorStyle, setIndicatorStyle] = useState({ opacity: 0 })
+    const [menuState, setMenuState] = useState(null)
 
     useLayoutEffect(() => {
         const selectedTab = tabRefs.current[selectedValue]
@@ -47,9 +49,22 @@ export default function CategoryTabs({ categories, activeId, onChange, onAddCate
         }
     }
 
-    const handleLongPressStart = (categoryId) => {
+    const handleLongPressStart = (categoryId, event) => {
+        const rect = event.currentTarget.getBoundingClientRect()
         const timer = window.setTimeout(() => {
-            onLongPressCategory?.(categoryId)
+            setMenuState({
+                categoryId,
+                position: {
+                    top: rect.bottom + 8,
+                    left: Math.min(rect.left, window.innerWidth - 180),
+                },
+                target: {
+                    top: rect.top,
+                    left: rect.left,
+                    width: rect.width,
+                    height: rect.height,
+                },
+            })
             clearLongPressTimer(categoryId)
         }, 420)
 
@@ -57,6 +72,7 @@ export default function CategoryTabs({ categories, activeId, onChange, onAddCate
     }
 
     return (
+        <>
         <div className="category-tabs-container">
             <button className="category-tabs-add" onClick={onAddCategory}>
                 <Plus />
@@ -84,13 +100,13 @@ export default function CategoryTabs({ categories, activeId, onChange, onAddCate
                         value={category.id}
                         ref={(element) => { tabRefs.current[category.id] = element }}
                         className={({ checked }) => checked ? 'category-tab active' : 'category-tab'}
-                        onPointerDown={() => handleLongPressStart(category.id)}
+                        onPointerDown={(event) => handleLongPressStart(category.id, event)}
                         onPointerUp={() => clearLongPressTimer(category.id)}
                         onPointerLeave={() => clearLongPressTimer(category.id)}
                         onPointerCancel={() => clearLongPressTimer(category.id)}
                         onContextMenu={(e) => e.preventDefault()}
                     >
-                        {({ checked }) => (
+                        {() => (
                             <>
                                 <span>{category.name}</span>
 
@@ -100,5 +116,14 @@ export default function CategoryTabs({ categories, activeId, onChange, onAddCate
                 ))}
             </RadioGroup>
         </div>
+        <CategoryDropMenu
+            category={categories.find(category => category.id === menuState?.categoryId)}
+            position={menuState?.position}
+            target={menuState?.target}
+            onRename={(categoryId) => onLongPressCategory?.(categoryId)}
+            onDelete={(categoryId) => onDeleteCategory?.(categoryId)}
+            onClose={() => setMenuState(null)}
+        />
+        </>
     )
 }

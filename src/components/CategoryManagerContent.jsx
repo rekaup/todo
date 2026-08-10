@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react"
-import { Check } from "lucide-react"
-import { RadioGroup } from '@headlessui/react'
 import '../styles/components/Modal.css'
 
 const COLOR_PALETTE = [
@@ -14,7 +12,7 @@ const COLOR_PALETTE = [
     "#0984e3",
 ]
 
-export default function CategoryManagerContent({ onCreate, onUpdate, editingCategory, closeModal, onDelete }) {
+export default function CategoryManagerContent({ onCreate, onUpdate, editingCategory, closeModal }) {
     const [newName, setNewName] = useState('')
     const [newColor, setNewColor] = useState(COLOR_PALETTE[0])
     const isEditing = Boolean(editingCategory)
@@ -46,12 +44,12 @@ export default function CategoryManagerContent({ onCreate, onUpdate, editingCate
     return (
         <>
             <div className="modal-header">
-                <h3 className="modal-title">{isEditing ? 'Edit Category' : 'Create Category'}</h3>
+                <h3 className="modal-title">{isEditing ? 'Rename Category' : 'Create Category'}</h3>
             </div>
             <div className="modal-body">
                 <textarea
                     type="text"
-                    placeholder={isEditing ? "Edit category" : "Category name"}
+                    placeholder={isEditing ? "Rename category" : "Category name"}
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
                     className="input-create-form"
@@ -63,16 +61,8 @@ export default function CategoryManagerContent({ onCreate, onUpdate, editingCate
                         {isEditing ? 'Save' : 'Add'}
                     </button>
                     {isEditing ? (
-                        <button
-                            type='button'
-                            className="modal-button delete flex-center w-full"
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                onDelete?.(editingCategory.id)
-                                closeModal()
-                            }}
-                        >
-                            Delete
+                        <button type='button' className="modal-button cancel flex-center w-full" onClick={closeModal}>
+                            Cancel
                         </button>
                     ) : (
                         <button type='button' className="modal-button cancel flex-center w-full" onClick={closeModal}>
