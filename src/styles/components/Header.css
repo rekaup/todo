@@ -52,17 +52,36 @@
     z-index: 30;
 }
 
+.user-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.48);
+    z-index: 0;
+    pointer-events: none;
+    animation: fadeIn var(--animation-fast) ease;
+}
+
+.user-menu-button.active {
+    position: relative;
+    z-index: 2;
+    background: var(--surface-2);
+}
+
+.user-menu-button.active svg {
+    stroke-width: 2.5;
+}
+
 .user-menu-items {
     position: absolute;
     right: 0;
     top: calc(100% + 8px);
     min-width: fit-content;
-    background: #1b1b1d;
-    border: none;
+    background: var(--surface);
+    border: 1px solid var(--surface-2);
     border-radius: 14px;
     padding: 6px;
     overflow: hidden;
-    z-index: 30;
+    z-index: 2;
 }
 
 .user-menu-item {

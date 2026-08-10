@@ -5,10 +5,11 @@
 
 .main {
     touch-action: pan-y;
+    padding-bottom: 70px;
 }
 
 .task-lists.completed {
-    padding-bottom: 70px;
+    padding-bottom: 0;
 }
 
 .task-list-title {

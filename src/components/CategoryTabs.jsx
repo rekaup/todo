@@ -10,6 +10,7 @@ export default function CategoryTabs({ categories, activeId, onChange, onAddCate
     const selectedValue = activeId === null ? ALL_VALUE : activeId
     const longPressTimerRef = useRef({})
     const tabRefs = useRef({})
+    const listRef = useRef(null)
     const [indicatorStyle, setIndicatorStyle] = useState({ opacity: 0 })
 
     useLayoutEffect(() => {
@@ -21,6 +22,21 @@ export default function CategoryTabs({ categories, activeId, onChange, onAddCate
             transform: `translateX(${selectedTab.offsetLeft}px)`,
             opacity: 1,
         })
+
+        const list = listRef.current
+        if (list) {
+            const listRect = list.getBoundingClientRect()
+            const selectedRect = selectedTab.getBoundingClientRect()
+            const targetScrollLeft = list.scrollLeft
+                + selectedRect.left
+                - listRect.left
+                - (list.clientWidth - selectedRect.width) / 2
+
+            list.scrollTo({
+                left: Math.max(0, targetScrollLeft),
+                behavior: 'smooth',
+            })
+        }
     }, [selectedValue, categories])
 
     const clearLongPressTimer = (categoryId) => {
@@ -50,6 +66,7 @@ export default function CategoryTabs({ categories, activeId, onChange, onAddCate
                 value={selectedValue}
                 onChange={(value) => onChange(value === ALL_VALUE ? null : value)}
                 className="category-tabs-list"
+                ref={listRef}
             >
                 <span className="category-tabs-indicator" style={indicatorStyle} aria-hidden="true" />
 
