@@ -15,25 +15,11 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
         el.style.height = `${el.scrollHeight}px`;
     };
 
-    const focusInputWhenKeyboardOpens = () => {
+    const focusInput = () => {
         const textarea = textareaRef.current
         if (!textarea) return
 
         window.requestAnimationFrame(() => {
-            textarea.scrollIntoView({ block: 'center', behavior: 'smooth' })
-
-            const viewport = window.visualViewport
-            if (!viewport) {
-                textarea.focus()
-                return
-            }
-
-            const viewportBottom = viewport.height + viewport.offsetTop
-            const textareaBottom = textarea.getBoundingClientRect().bottom
-            if (textareaBottom > viewportBottom - 24) {
-                window.scrollBy({ top: textareaBottom - viewportBottom + 24, behavior: 'smooth' })
-            }
-
             textarea.focus()
         })
     }
@@ -48,20 +34,10 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
         const textarea = textareaRef.current
         if (!textarea) return
 
-        const focusTimer = window.requestAnimationFrame(() => {
-            focusInputWhenKeyboardOpens()
-        })
-
-        const handleViewportChange = () => {
-            focusInputWhenKeyboardOpens()
-        }
-
-        const viewport = window.visualViewport
-        viewport?.addEventListener('resize', handleViewportChange)
+        const focusTimer = window.requestAnimationFrame(focusInput)
 
         return () => {
             window.cancelAnimationFrame(focusTimer)
-            viewport?.removeEventListener('resize', handleViewportChange)
         }
     }, [])
 
@@ -85,7 +61,7 @@ export default function TaskModalContent({modalText, setModalText, handleSave, c
                 onChange={handleModalTextChange}
                 className='modal-input w-full'
                 autoFocus
-                onFocus={focusInputWhenKeyboardOpens}
+                onFocus={focusInput}
                 />
             </div>
             <CategoryPicker

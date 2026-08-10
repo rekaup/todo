@@ -6,11 +6,11 @@ export function useModal() {
     const [modalText, setModalText] = useState('')
     const [modalCategoryID, setModalCategoryId] = useState(null)
 
-    function openAddModal() {
+    function openAddModal(categoryId = null) {
         setModalMode('add')
         setModalText('')
         setModalTaskId(null)
-        setModalCategoryId(null)
+        setModalCategoryId(categoryId)
     }
 
     function openEditMode(task){

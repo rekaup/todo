@@ -200,7 +200,7 @@ function App() {
       </div>
 
       <BottonBar 
-        openAddModal={openAddModal}
+        openAddModal={() => openAddModal(activeCategory)}
       />
     </div>
   )

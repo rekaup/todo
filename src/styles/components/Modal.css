@@ -8,7 +8,21 @@
     inset: 0;
     background: rgba(0, 0, 0, 0.62);
     z-index: 40;
-    animation: fadeIn var(--animation-fast) ease;
+}
+
+.modal-overlay-enter,
+.modal-overlay-leave {
+    transition: opacity 220ms ease;
+}
+
+.modal-overlay-enter-from,
+.modal-overlay-leave-to {
+    opacity: 0;
+}
+
+.modal-overlay-enter-to,
+.modal-overlay-leave-from {
+    opacity: 1;
 }
 
 .modal-shell {
@@ -33,14 +47,30 @@
     margin: 0 var(--space-md) var(--space-md);
     box-sizing: border-box;
     z-index: 41;
-    animation: slideUp var(--animation-normal) ease;
-    transition: var(--transition);
+    transition: transform 280ms cubic-bezier(.2, .8, .2, 1), opacity 220ms ease;
     height: auto;
     max-height: min(88dvh, 720px);
     overflow-y: auto;
     position: relative;
     pointer-events: auto;
     box-shadow: 0 -14px 40px rgba(0, 0, 0, 0.45);
+}
+
+.modal-panel-enter,
+.modal-panel-leave {
+    transition: transform 280ms cubic-bezier(.2, .8, .2, 1), opacity 220ms ease;
+}
+
+.modal-panel-enter-from,
+.modal-panel-leave-to {
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.modal-panel-enter-to,
+.modal-panel-leave-from {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .modal-header {
@@ -147,11 +177,18 @@
 }
 
 .modal-handle {
-    width: 22%;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.16);
+    width: 52px;
+    height: 5px;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.32);
     border-radius: 999px;
-    margin: 0 auto var(--space-xs);
+    margin: calc(var(--space-sm) * -1) auto var(--space-lg);
+    cursor: grab;
+    touch-action: none;
+}
+
+.modal-handle:active {
+    cursor: grabbing;
 }
 
 .modal-body {
