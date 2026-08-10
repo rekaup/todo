@@ -2,13 +2,26 @@ import '../styles/components/CategoryTabs.css'
 import '../styles/components/CategoryPicker.css'
 import { RadioGroup } from '@headlessui/react'
 import { Plus, SquarePen } from 'lucide-react'
-import { useRef } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 
 const ALL_VALUE = '__all__'
 
 export default function CategoryTabs({ categories, activeId, onChange, onAddCategory, onDeleteCategory, onLongPressCategory }) {
     const selectedValue = activeId === null ? ALL_VALUE : activeId
     const longPressTimerRef = useRef({})
+    const tabRefs = useRef({})
+    const [indicatorStyle, setIndicatorStyle] = useState({ opacity: 0 })
+
+    useLayoutEffect(() => {
+        const selectedTab = tabRefs.current[selectedValue]
+        if (!selectedTab) return
+
+        setIndicatorStyle({
+            width: selectedTab.offsetWidth,
+            transform: `translateX(${selectedTab.offsetLeft}px)`,
+            opacity: 1,
+        })
+    }, [selectedValue, categories])
 
     const clearLongPressTimer = (categoryId) => {
         const timer = longPressTimerRef.current[categoryId]
@@ -38,8 +51,11 @@ export default function CategoryTabs({ categories, activeId, onChange, onAddCate
                 onChange={(value) => onChange(value === ALL_VALUE ? null : value)}
                 className="category-tabs-list"
             >
+                <span className="category-tabs-indicator" style={indicatorStyle} aria-hidden="true" />
+
                 <RadioGroup.Option
                     value={ALL_VALUE}
+                    ref={(element) => { tabRefs.current[ALL_VALUE] = element }}
                     className={({ checked }) => checked ? 'category-tab active' : 'category-tab'}
                 >
                     {() => <span>all</span>}
@@ -49,6 +65,7 @@ export default function CategoryTabs({ categories, activeId, onChange, onAddCate
                     <RadioGroup.Option
                         key={category.id}
                         value={category.id}
+                        ref={(element) => { tabRefs.current[category.id] = element }}
                         className={({ checked }) => checked ? 'category-tab active' : 'category-tab'}
                         onPointerDown={() => handleLongPressStart(category.id)}
                         onPointerUp={() => clearLongPressTimer(category.id)}
@@ -59,17 +76,7 @@ export default function CategoryTabs({ categories, activeId, onChange, onAddCate
                         {({ checked }) => (
                             <>
                                 <span>{category.name}</span>
-                                {checked && (
-                                    <span
-                                        className="category-tab-delete"
-                                        onClick={(e) => {
-                                            e.stopPropagation()
-                                            onLongPressCategory?.(category.id)
-                                        }}
-                                    >
-                                        <SquarePen size={14} />
-                                    </span>
-                                )}
+
                             </>
                         )}
                     </RadioGroup.Option>

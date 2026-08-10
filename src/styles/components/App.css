@@ -3,6 +3,10 @@
     width: 90%;
 }
 
+.main {
+    touch-action: pan-y;
+}
+
 .task-lists.completed {
     padding-bottom: 70px;
 }

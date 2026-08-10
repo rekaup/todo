@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import AppTaskCounter from './components/AppTaskCounter'
 import TaskItem from './components/AppTaskItem'
 import Header from './components/AppHeader'
@@ -28,6 +28,9 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [isCreatingCategory, setIsCreatingCategory] = useState(false)
   const [editingCategoryId, setEditingCategoryId] = useState(null)
+  const swipeStartRef = useRef(null)
+  const swipeDetectedRef = useRef(false)
+  const selectedCategoryValue = activeCategory ?? '__all__'
   const filteredActiveTasks = activeTasks.filter(task =>
     activeCategory === null || task.categoryId === activeCategory
   )
@@ -68,8 +71,49 @@ function App() {
     setEditingCategoryId(null)
   }
 
+  function handleSwipeStart(event) {
+    if (!event.isPrimary || modalMode || isCreatingCategory || inInfoOpen) return
+
+    swipeStartRef.current = { x: event.clientX, y: event.clientY }
+    swipeDetectedRef.current = false
+  }
+
+  function handleSwipeEnd(event) {
+    const start = swipeStartRef.current
+    swipeStartRef.current = null
+    if (!start || !event.isPrimary) return
+
+    const distanceX = event.clientX - start.x
+    const distanceY = event.clientY - start.y
+    if (Math.abs(distanceX) < 50 || Math.abs(distanceX) <= Math.abs(distanceY)) return
+
+    const values = ['__all__', ...categories.map(category => category.id)]
+    const currentIndex = values.indexOf(selectedCategoryValue)
+    const direction = distanceX < 0 ? 1 : -1
+    const nextIndex = currentIndex + direction
+    if (nextIndex < 0 || nextIndex >= values.length) return
+
+    swipeDetectedRef.current = true
+    const nextValue = values[nextIndex]
+    setActiveCategory(nextValue === '__all__' ? null : nextValue)
+  }
+
+  function handleSwipeClick(event) {
+    if (!swipeDetectedRef.current) return
+
+    event.preventDefault()
+    event.stopPropagation()
+    swipeDetectedRef.current = false
+  }
+
   return (
-    <div className="main">
+    <div
+      className="main"
+      onPointerDown={handleSwipeStart}
+      onPointerUp={handleSwipeEnd}
+      onPointerCancel={() => { swipeStartRef.current = null }}
+      onClickCapture={handleSwipeClick}
+    >
       
       <AppWarning 
       warningText={"Пользуйтесь только на одном устройстве, иначе данные могут не сохраниться"
