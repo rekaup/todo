@@ -35,7 +35,7 @@ export default function CategoryDropMenu({ category, position, onRename, onDelet
                     role="menuitem"
                     onClick={() => { onDelete(category.id); onClose() }}
                 >
-                    <Trash2 size={16} />
+                    <Trash2 size={16} className='danger icon'/>
                     <span>Delete</span>
                 </button>
             </div>
