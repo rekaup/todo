@@ -1,16 +1,19 @@
 import '../styles/components/Header.css'
-import '../styles/components/BottonBar.css'
-import UserDropMenu from './UserDropMenu'
+import { useTelegramUser } from '../hooks/useTelegramUser'
 
 export default function Header({ openInfoModal }) {
+    const user = useTelegramUser()
     return (
         <header className='app-header'>
-            <div className='header-container flex-column'>
-                <h1 className='header-title'>todo</h1>
-            </div>
-            <div className='flex-center info'>
-                <UserDropMenu openInfoModal={openInfoModal} />
-            </div>
+            <button onClick={openInfoModal} className='user-avatar-button'>
+                {user?.photo_url? (
+                    <img src={user.photo_url} alt={user.first_name} className='user-avatar'/>
+                ) : (
+                    <div className='user-avatar-fallback'>
+                        {user?.first_name?.[0] ?? '?'}
+                    </div>
+                )}
+            </button>
         </header>
     )
 }

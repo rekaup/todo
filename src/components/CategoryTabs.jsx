@@ -7,7 +7,7 @@ import CategoryDropMenu from './CategoryDropMenu'
 
 const ALL_VALUE = '__all__'
 
-export default function CategoryTabs({ categories, activeId, onChange, onAddCategory, onDeleteCategory, onLongPressCategory }) {
+export default function CategoryTabs({ categories, activeId, onChange, onDeleteCategory, onLongPressCategory }) {
     const selectedValue = activeId === null ? ALL_VALUE : activeId
     const longPressTimerRef = useRef({})
     const tabRefs = useRef({})
@@ -74,9 +74,6 @@ export default function CategoryTabs({ categories, activeId, onChange, onAddCate
     return (
         <>
         <div className="category-tabs-container">
-            <button className="category-tabs-add" onClick={onAddCategory}>
-                <Plus />
-            </button>
 
             <RadioGroup
                 value={selectedValue}

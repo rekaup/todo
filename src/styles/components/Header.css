@@ -8,6 +8,12 @@
     justify-content: space-between;
     margin-top: var(--space-lg);
     margin-bottom: var(--space-sm);
+    justify-content: center;
+}
+
+button {
+    background: none;
+
 }
 
 .app-header p,
@@ -79,4 +85,24 @@
     top: calc(100% + 8px);
     min-width: fit-content;
     z-index: 2;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-avatar-fallback {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
 }

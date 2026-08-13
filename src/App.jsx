@@ -131,7 +131,6 @@ function App() {
       categories={categories}
       activeId={activeCategory}
       onChange={setActiveCategory}
-      onAddCategory={openCreateCategoryModal}
       onDeleteCategory={handleDeleteCategory}
       onLongPressCategory={openEditCategoryModal}
       />
@@ -201,6 +200,7 @@ function App() {
 
       <BottonBar 
         openAddModal={() => openAddModal(activeCategory)}
+        onAddCategory={openCreateCategoryModal}
       />
     </div>
   )
