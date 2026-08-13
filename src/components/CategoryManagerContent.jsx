@@ -53,7 +53,6 @@ export default function CategoryManagerContent({ onCreate, onUpdate, editingCate
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
                     className="input-create-form"
-                    autoFocus
                 />
 
                 <div className="button-container">

@@ -6,9 +6,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
-    margin-bottom: 20px;
-
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-md);
 }
 
 button {
