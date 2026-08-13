@@ -11,6 +11,14 @@
     justify-content: center;
     transition: var(--transition);
     outline: none;
+    max-width: 140px;
+}
+
+.button.category span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
 }
 
 .button.category,
