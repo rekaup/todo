@@ -1,16 +1,16 @@
 .button.category.active {
-    background-color: var(--primary);
-    color: var(--text);
+    background-color: var(--primary-bg);
+    color: var(--primary);
 }
 
 .button.category {
-    background-color: rgba(255, 255, 255, 0.05);
     color: var(--text-secondary);
     display: flex;
     align-items: center;
     gap: var(--space-sm);
     justify-content: center;
     transition: var(--transition);
+    outline: none;
 }
 
 .button.category,
@@ -19,19 +19,25 @@
 }
 
 .category-picker {
-    display: flex;
-    gap: var(--space-xs);
-    align-items: flex-start;
     width: 100%;
+    margin: 0;
+    gap: 0;
 }
 
 .category-picker-list {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 5px;
-    min-width: 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    background-color: var(--surface-2);
+    border-radius: var(--radius-md);
+    padding: 4px;
     width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .category-picker-list [role='radio'] {
@@ -51,7 +57,6 @@
 }
 
 .button {
-    background-color: rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-sm);
     color: var(--text);
     align-items: center;
