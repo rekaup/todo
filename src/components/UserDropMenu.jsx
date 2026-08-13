@@ -1,9 +1,12 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Info, User } from 'lucide-react'
+import { Info } from 'lucide-react'
 import '../styles/components/Header.css'
 import '../styles/components/DropMenu.css'
+import { useTelegramUser } from '../hooks/useTelegramUser'
 
 export default function UserDropMenu({ openInfoModal }) {
+    const user = useTelegramUser()
+
     return (
         <div className="user-menu">
             <Menu>
@@ -12,10 +15,16 @@ export default function UserDropMenu({ openInfoModal }) {
                         {open && <div className="user-menu-overlay" aria-hidden="true" />}
 
                         <MenuButton className={({ open: isOpen }) => isOpen
-                            ? 'task-button flex-center info user-menu-button active'
-                            : 'task-button flex-center info user-menu-button'}
+                            ? 'user-menu-button active'
+                            : 'user-menu-button'}
                         >
-                            <User />
+                            {user?.photo_url ? (
+                                <img src={user.photo_url} alt={user.first_name} className="user-avatar" />
+                            ) : (
+                                <div className="user-avatar-fallback">
+                                    {user?.first_name?.[0] ?? '?'}
+                                </div>
+                            )}
                         </MenuButton>
 
                         <MenuItems className="user-menu-items drop-menu">
