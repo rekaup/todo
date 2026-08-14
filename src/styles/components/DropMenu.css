@@ -23,10 +23,7 @@
     cursor: pointer;
     text-align: left;
     font: inherit;
-}
-
-.drop-menu-item:hover {
-    background: var(--surface-2);
+    overflow: hidden;
 }
 
 .drop-menu-item svg {

@@ -21,6 +21,10 @@
     transition: var(--transition);
 }
 
+.task-button.add-category {
+    border: 1px solid var(--surface-2);
+}
+
 .task-button:hover {
     box-shadow: var(--shadow-primary);
 }

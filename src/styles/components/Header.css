@@ -66,6 +66,7 @@ button {
     animation: fadeIn var(--animation-fast) ease;
     backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1px);
+    overflow: hidden;
 }
 
 .user-menu-button.active {
